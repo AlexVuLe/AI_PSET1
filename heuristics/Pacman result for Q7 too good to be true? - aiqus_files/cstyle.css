@@ -1,0 +1,131 @@
+#searchBar, #ground, .boxA, .paginator .curr
+{
+background-color: #356FCB;
+}
+
+#searchBar .options {
+color: #FFFFFF;
+}
+
+#ground a, #ground .link-separator
+{
+color: #FFFFFF;
+}
+
+.votes, .status, .views, .medal, .boxA
+{
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;
+}
+
+.tags a, span.tag, .tabsA a, .sticky-sort-tabs {
+background-color: #F7F7F7;
+}
+
+.short-summary .votes, .short-summary .views, .tags a, span.tag, .tabsA a, .sticky-sort-tabs
+{
+color: #3E3E3E;
+}
+
+.medal
+{
+background: -moz-linear-gradient(
+ top,
+ #FFFFDF 10%,
+ #FFFFCD 60%
+ );
+background: -webkit-gradient(
+ linear,
+ left top,
+ left bottom,
+ color-stop(0.10, #FFFFDF),
+ color-stop(0.60, #FFFFCD)
+ );
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFDF', endColorstr='#FFFFCD');
+}
+
+.unanswered {
+color: #602421;
+}
+
+.answered {
+color: #253958;
+}
+
+.answered-accepted, .answer-votes.answered-accepted {
+color: #23461B;
+}
+
+.short-summary h2 a {
+color: #204A8A;
+}
+
+#nav a {
+background: -moz-linear-gradient(
+ top,
+ #F1F3F8 10%,
+ #E5EBF8 60%
+ );
+background: -webkit-gradient(
+ linear,
+ left top,
+ left bottom,
+ color-stop(.1, #F1F3F8),
+ color-stop(.6, #E5EBF8)
+ );
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#F1F3F8', endColorstr='#E5EBF8');
+-moz-border-radius-topleft: 5px;
+-moz-border-radius-topright: 5px;
+-webkit-border-top-left-radius: 5px;
+-webkit-border-top-right-radius: 5px;
+border-top-left-radius: 5px;
+border-top-right-radius: 5px;
+}
+
+#nav a.on
+{
+background: -moz-linear-gradient(
+ top,
+ #9AB9EB 10%,
+ #356FCB 60%
+ );
+background: -webkit-gradient(
+ linear,
+ left top,
+ left bottom,
+ color-stop(0.10, #9AB9EB),
+ color-stop(0.60, #356FCB)
+ );
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#9AB9EB', endColorstr='#356FCB');
+}
+
+.sidebarad
+{
+border-style:solid;
+border-width:1px;
+-moz-border-radius-topleft: 5px;
+-moz-border-radius-topright: 5px;
+-webkit-border-top-left-radius: 5px;
+-webkit-border-top-right-radius: 5px;
+border-top-left-radius: 5px;
+border-top-right-radius: 5px;
+}
+
+input#pgm, input#not-logged-in-pgm{
+padding-left:3px;
+}
+
+div#sidebar-upper{
+padding-left:6px;
+padding-right:6px;
+}
+
+th#cust_body_check{
+width:30px;
+}
+
+div#tagSelector{
+padding-top:3px;
+padding-bottom:6px;
+}

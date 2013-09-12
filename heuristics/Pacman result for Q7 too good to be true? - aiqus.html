@@ -1,0 +1,1881 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- base_content.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+        <title>Pacman result for Q7 too good to be true? - aiqus</title>
+        <meta name="description" content="I played with the Pacman programming assignment given to the Standford class (NOT to our online class) and found a result for the trickySearch Q7 problem with only 379 search nodes expanded. In the statement of the question, it is said that it is hard to get fewer than 7000 nodes expanded. Thus, t">
+        <meta name="keywords" content="heuristic,pacman">
+        
+        <link rel="canonical" href="http://www.aiqus.com/questions/2206/pacman-result-for-q7-too-good-to-be-true">
+        <link rel="alternate" type="application/rss+xml" title="RSS" href="http://www.aiqus.com/questions/2206/pacman-result-for-q7-too-good-to-be-true?type=rss">
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <meta name="google-site-verification" content="yop8Kk9UOKvewee4EeNLLt1xDtEm6RCB99SFLX42yQg">
+        
+        <link rel="shortcut icon" href="http://www.aiqus.com/upfiles/aiqus_favicon.png">
+        <link href="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/style.css" rel="stylesheet" type="text/css">
+        
+        <link href="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/cstyle.css" rel="stylesheet" type="text/css">
+        
+        <link rel="stylesheet" type="text/css" href="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/jquery-ui.html">
+	
+        <!--[if IE 6]>
+        <style type="text/css">
+        img, div, a { behavior: url(/m/aiqus_skin/media/iepngfix/iepngfix.htc) }
+        </style>
+        <![endif]-->
+        
+
+        <script src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/ga.js" async="" type="text/javascript"></script><script src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/jsapi.js" type="text/javascript"></script>
+        <script type="text/javascript">
+        /*<![CDATA[*/
+            google.load("jquery", "1.4.2");
+            google.load("jqueryui", "1", {autoload:true});
+
+            var i18nLang = 'en';
+            var appUrl = 'http://www.aiqus.com'
+            var scriptUrl = '/'
+            var osqaSkin = 'aiqus_skin';
+
+            var messages = {
+                username: '',
+                confirm: "Are you sure?",
+                yes: "Yes",
+                no: "No",
+                message: "Message:",
+                cancel: "Cancel",
+                close: "Close",
+                ok: "Ok",
+                matching_tags_url: "/matching_tags/",
+                word: "word",
+                words: "words",
+                character: "character",
+                characters: "characters"
+            }
+        /*]]>*/
+        </script><script src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/jquery.js" type="text/javascript"></script><script src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/jquery-ui.js" type="text/javascript"></script>
+        <script type="text/javascript" src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/osqa.js"></script>
+        
+        
+            <script type="text/javascript" src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/MathJax.js"></script>
+<script type="text/javascript">
+$(function() {
+    $('.tags a:contains(#ml)').prepend('<img height="15" width="22" style="vertical-align: text-top; padding-right:4px" src="/upfiles/tags/ml1.png" />');
+    $('.tags a:contains(#cs101)').prepend('<img height="16" width="21" style="vertical-align: text-top; padding-right:4px" src="/upfiles/tags/cs1011.png" />');
+    $('.tags a:contains(#pgm)').prepend('<img height="14" width="27" style="vertical-align: text-top; padding-right:4px" src="/upfiles/tags/pgm1.png" />');
+    $('.tags a:contains(#gt)').prepend('<img height="15" width="18" style="vertical-align: text-top; padding-right:4px" src="/upfiles/tags/gt2.png" />');
+    $('.tags a:contains(#nlp)').prepend('<img height="14" width="20" style="vertical-align: text-top; padding-right:4px" src="/upfiles/tags/nlp1.png" />');
+    $('.tags a:contains(#ll)').prepend('<img height="16" width="17" style="vertical-align: text-top; padding-right:4px" src="/upfiles/tags/ll1.png" />');
+    $('.tags a:contains(#daa)').prepend('<img height="15" width="23" style="vertical-align: text-top; padding-right:4px" src="/upfiles/tags/daa1.png" />');
+    $('.tags a:contains(#cr)').prepend('<img height="15" width="11" style="vertical-align: text-top; padding-right:4px" src="/upfiles/tags/cr1.png" />');
+    $('.tags a:contains(#saas)').prepend('<img height="12" width="25" style="vertical-align: text-top; padding-right:4px;padding-top:1px" src="/upfiles/tags/saas.png" />');
+    $('.tags a:contains(#mt)').prepend('<img height="14" width="24" style="vertical-align: text-top; padding-right:4px" src="/upfiles/tags/mt.png" />');
+    $('.tags a:contains(#ai)').prepend('<img height="15" width="35" style="vertical-align: text-top; padding-right:4px" src="/upfiles/tags/ai.png" />');
+    $('.tags a:contains(#hci)').prepend('<img height="14" width="18" style="vertical-align: text-top; padding-right:4px" src="/upfiles/tags/hci.png" />');
+    $('.tags a:contains(#te)').prepend('<img height="14" width="22" style="vertical-align: text-top; padding-right:4px" src="/upfiles/tags/te.png" />');
+    $('.tags a:contains(%prc)').prepend('<img height="14" width="26" style="vertical-align: text-top; padding-right:4px" src="/upfiles/tags/prc_32_14.png" />');
+    $('.tags a:contains(%bse)').prepend('<img height="16" width="16" style="vertical-align: text-top; padding-right:4px" src="/upfiles/tags/search_16.png" />');
+});
+</script>
+        
+        
+        
+        <script type="text/javascript" src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/osqa_002.js"></script>
+        <script type="text/javascript" src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/jquery_002.js"></script>
+        <script type="text/javascript" src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/showdown.js"></script>
+        <script type="text/javascript" src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/wmd.js"></script>
+        <link rel="stylesheet" type="text/css" href="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/wmd.css">
+
+        
+        <script type="text/javascript" src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/viewbox_min.js"></script>
+        <script type="text/javascript" src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/youtube.js"></script>
+        <link rel="stylesheet" type="text/css" href="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/viewbox.css">
+        
+        
+
+        <script type="text/javascript">
+        $().ready(function(){
+            $("#nav_questions").attr('className',"on");
+            var answer_sort_tab = "";
+
+            if (answer_sort_tab) {
+                $("#" + answer_sort_tab).attr('className',"on");
+            }
+
+            $('#editor').TextAreaResizer();
+
+            //toggle preview of editor
+            var display = true;
+            var txt = "[hide preview]";
+            $('#pre-collapse').text(txt);
+            $('#pre-collapse').bind('click', function(){
+                txt = display ? "[show preview]" : "[hide preview]";
+                display = !display;
+                $('#previewer').toggle();
+                $('#pre-collapse').text(txt);
+            });
+        });
+
+        function submitClicked(e, f) {
+            if(!(browserTester('chrome') || browserTester('safari'))) {
+                $("input.submit")[0].disabled=true;
+            }
+            window.removeEventListener('beforeunload', beforeUnload, true);
+            if (f) {
+                f.submit();
+            }
+        }
+
+        function beforeUnload(e) {
+
+            if($("textarea#editor")[0].value != "") {
+                return yourWorkWillBeLost(e);
+            }
+
+            var commentBoxes = $("textarea.commentBox");
+            for(var index = 0; index < commentBoxes.length; index++) {
+                if(commentBoxes[index].value != "") {
+                    return yourWorkWillBeLost(e);
+                }
+            }
+        }
+        window.addEventListener('beforeunload', beforeUnload, true);
+        </script><style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Hover_Arrow {position: absolute; width: 15px; height: 11px; cursor: pointer}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 5px 0px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -khtml-border-radius: 5px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 1px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; color: #666666}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuRadioCheck {position: absolute; left: .7em}
+.MathJax_MenuLabel {padding: 1px 2em 3px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #DDDDDD; margin: 4px 3px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: #606872; color: white}
+.MathJax_Menu_Close {position: absolute; width: 31px; height: 31px; top: -15px; left: -15px}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1px; bottom: 2px; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style>
+        <noscript>
+            <style>
+                .comment.not_top_scorer {
+                    display: block;
+                }
+                .comment-form-container {
+                    display: block;
+                }
+                .div.comment-tools {
+                    display: none;
+                }
+            </style>
+        </noscript>
+
+        <link rel="search" type="application/opensearchdescription+xml" href="http://www.aiqus.com/opensearch.xml" title="aiqus Search">
+        
+
+<!-- Google Analytics Start -->
+
+
+
+<!-- Google Analytics End -->
+
+    </head>
+    <body>
+	<div class="wrapper">
+        
+        <!-- template header.html -->
+
+
+	<div id="roof">
+	  
+		<div id="logo">
+			<a href="http://www.aiqus.com/">
+				<img src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/aiquslogo9.png" title="back to home page" alt="aiqus: the ai &amp; cs learning community logo">
+			</a>
+		</div>
+	  
+		<div id="top">
+		     <a href="http://www.aiqus.com/account/signin/">login</a>  <a href="http://www.aiqus.com/about/">about</a>  <a href="http://www.aiqus.com/faq/">faq</a> 
+		</div>
+
+    <div id="nav">
+        <a id="nav_questions" class="on" href="http://www.aiqus.com/questions/">questions</a><a id="nav_tags" href="http://www.aiqus.com/tags/">tags</a><a id="nav_users" href="http://www.aiqus.com/users/">users</a><a id="nav_badges" href="http://www.aiqus.com/badges/">badges</a><a id="nav_unanswered" href="http://www.aiqus.com/questions/unanswered/">unanswered</a>
+	<a id="nav_wiki" href="http://www.aiqus.com/wiki" class="special wiki">wiki</a>
+        <a id="nav_ask" href="http://www.aiqus.com/questions/ask/" class="special">ask a question</a>
+    </div>
+  </div>
+
+  <div class="clear"></div>
+  
+	<div id="searchBar">
+    <form action="/search/" method="get">
+        <div style="display:none"><input name="csrfmiddlewaretoken" value="682411cf949cb7c4bb31f2d14f52b0a0" type="hidden"></div>
+        <div>
+            <input class="searchInput" name="q" id="keywords" type="text">
+            <input name="Submit" value="search" class="searchBtn" type="submit">
+        </div>
+        <div class="options">
+            <input id="type-question" value="question" name="t" checked="checked" type="radio"><label for="type-question">questions</label>
+            <input id="type-tag" value="tag" name="t" type="radio"><label for="type-tag">tags</label>
+            <input id="type-user" value="user" name="t" type="radio"><label for="type-user">users</label>
+        </div>
+    </form>	
+	</div>
+
+	
+  
+  
+		<div style="text-align:center;">	
+			Members don't see the ad below. <a href="http://www.aiqus.com/account/local/register/">Register now</a>!
+		</div>
+		<div style="text-align:center;">		
+			<script type="text/javascript"><!--
+				google_ad_client = "ca-pub-8295897761072887";
+				/* aiqus_header_728x90 */
+				google_ad_slot = "8526477084";
+				google_ad_width = 728;
+				google_ad_height = 90;
+				//-->
+				</script>
+				<script type="text/javascript" src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/show_ads.js">
+			</script><ins style="display:inline-table;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:728px"><ins id="aswift_0_anchor" style="display:block;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:728px"><iframe marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){w.location.replace(h)}}" id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;" frameborder="0" height="90" scrolling="no" width="728"></iframe></ins></ins>						
+		</div>
+  
+
+<!-- end template header.html -->
+
+        
+
+
+
+<div id="wrapper">
+    
+    
+    <div id="room">
+	
+        
+        <div id="CALeft">
+<!-- google_ad_section_start -->
+            
+<div class="headNormal">
+    <h1><a href="http://www.aiqus.com/questions/2206/pacman-result-for-q7-too-good-to-be-true">Pacman result for Q7 too good to be true?</a></h1>
+</div>
+
+<div id="main-body" class="">
+    <div id="askform">
+            <table style="width:100%;" id="question-table">
+                <tbody><tr>
+                    <td style="width:30px;vertical-align:top">
+                        <div class="vote-buttons">
+                            
+
+<a id="post-2206-upvote" title="I like this post (click again to cancel)" class="ajax-command post-vote up " href="http://www.aiqus.com/vote/2206/up/" rel="nofollow"> </a>
+<div id="post-2206-score" class="post-score" title="current number of votes">
+    1
+</div>
+<a id="post-2206-downvote" title="I dont like this post (click again to cancel)" class="ajax-command post-vote down" href="http://www.aiqus.com/vote/2206/down/" rel="nofollow"> </a>
+                            
+
+<a id="favorite-mark" title="mark/unmark this question as favorite (click again to cancel)" class="ajax-command favorite-mark " href="http://www.aiqus.com/mark_favorite/2206/" rel="nofollow"> </a>
+<div id="favorite-count" class="favorite-count">
+   1
+</div>
+                            
+                        </div>
+                    </td>
+                    <td>
+                        <div id="item-right">
+                            <div class="question-body">
+                                <p>I played with the Pacman programming 
+assignment given to the Standford class (NOT to our online class) and 
+found a result for the trickySearch Q7 problem with only 379 search 
+nodes expanded.  In the statement of the question, it is said that it is
+ hard to get fewer than 7000 nodes expanded.  Thus, the result I get 
+seems almost too good to be true.  As far as I can tell, by putting an 
+explicit check to verify that the heuristic cost never decreases by more
+ than 1 at each step in the expansion, my heuristic is consistent.  I am
+ also pretty sure that it is admissible.  Is there anything else I can 
+do to verify that I use a valid heuristic?</p>
+<p>I should note that the heuristic I use is particularly suited to maze
+ layouts like the trickySearch one.  When I use it for the seemingly 
+simpler tinySearch, I get 568 nodes expanded.</p>
+                            </div>
+                            <div id="question-tags" class="tags-container tags">
+                                
+                                    <a href="http://www.aiqus.com/tags/heuristic/" class="post-tag tag-link-heuristic" title="see questions tagged 'heuristic'" rel="tag">heuristic</a>
+                                
+                                    <a href="http://www.aiqus.com/tags/pacman/" class="post-tag tag-link-pacman" title="see questions tagged 'pacman'" rel="tag">pacman</a>
+                                
+                            </div>
+                            <div id="question-controls" class="post-controls">                            
+                                
+
+                                
+
+
+                            </div>
+                            <div class="post-update-info-container">
+                                    
+<div class="post-update-info post-update-info-user">
+    <p style="line-height:12px;">
+        asked
+        <strong>16 Oct '11, 02:12</strong>
+    </p>
+    <img class="gravatar" src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/ca465da45735c9efed28478928fa9fbe.jpg" alt="aroberge's gravatar image" height="32" width="32">
+    <p><a href="http://www.aiqus.com/users/559/aroberge">aroberge</a><br>
+    <span class="score" title="4034 karma"><span class="">4.0k</span></span><span title="5 badges"><span class="silver">●</span><span class="badgecount">5</span></span><span title="17 badges"><span class="bronze">●</span><span class="badgecount">17</span></span><br>
+    </p>
+</div>
+
+
+                            </div>
+                            
+
+
+<div class="comments-container" id="comments-container-2206">
+    
+        <a name="2257"></a>
+        <div class="comment" id="comment-2257">
+            <div id="post-2257-score" class="comment-score"></div>
+            <div class="comment-text">Have you tried running it on mediumSearch?</div>
+            <div class="comment-info" id="comment-2257-info">
+                
+                
+                
+                
+                    
+
+                <span class="comment-age">(16 Oct '11, 06:03)</span>
+                <a class="comment-user userinfo" href="http://www.aiqus.com/users/733/maxim">Maxim</a>
+                <img class="gravatar" src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/2ec11f074132433a40fd8336b931c40d.png" alt="Maxim's gravatar image" height="18" width="18">
+            </div>
+        </div>
+    
+        <a name="2308"></a>
+        <div class="comment" id="comment-2308">
+            <div id="post-2308-score" class="comment-score"></div>
+            <div class="comment-text">Yes, and I had to stop it since, 
+after 20 minutes of run time, it had not come up with a solution and was
+ requiring over 2GB of memory.</div>
+            <div class="comment-info" id="comment-2308-info">
+                
+                
+                
+                
+                    
+
+                <span class="comment-age">(16 Oct '11, 08:31)</span>
+                <a class="comment-user userinfo" href="http://www.aiqus.com/users/559/aroberge">aroberge</a>
+                <img class="gravatar" src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/ca465da45735c9efed28478928fa9fbe_002.jpg" alt="aroberge's gravatar image" height="18" width="18">
+            </div>
+        </div>
+    
+        <a name="2311"></a>
+        <div class="comment" id="comment-2311">
+            <div id="post-2311-score" class="comment-score"></div>
+            <div class="comment-text">can you link to the assignment pages and any other references pls ;)</div>
+            <div class="comment-info" id="comment-2311-info">
+                
+                
+                
+                
+                    
+
+                <span class="comment-age">(16 Oct '11, 08:34)</span>
+                <a class="comment-user userinfo" href="http://www.aiqus.com/users/488/merlin">Merlin</a>
+                <img class="gravatar" src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/a8d421ac146570f9f3f44c0eccc91f92.png" alt="Merlin's gravatar image" height="18" width="18">
+            </div>
+        </div>
+    
+        <a name="2318"></a>
+        <div class="comment" id="comment-2318">
+            <div id="post-2318-score" class="comment-score"></div>
+            <div class="comment-text"><a href="http://robots.stanford.edu/cs221/progAssignments/PA1/search.html" rel="nofollow">http://robots.stanford.edu/cs221/progAssignments/PA1/search.html</a></div>
+            <div class="comment-info" id="comment-2318-info">
+                
+                
+                
+                
+                    
+
+                <span class="comment-age">(16 Oct '11, 08:45)</span>
+                <a class="comment-user userinfo" href="http://www.aiqus.com/users/559/aroberge">aroberge</a>
+                <img class="gravatar" src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/ca465da45735c9efed28478928fa9fbe_002.jpg" alt="aroberge's gravatar image" height="18" width="18">
+            </div>
+        </div>
+    
+        <a name="17806"></a>
+        <div class="comment" id="comment-17806">
+            <div id="post-17806-score" class="comment-score"></div>
+            <div class="comment-text">Those assignments were a blast.  I
+ got 6,110 nodes expanded for trickySearch and 414 nodes expanded on 
+tinySearch (using the AStarFoodSearchAgent).</div>
+            <div class="comment-info" id="comment-17806-info">
+                
+                
+                
+                
+                    
+
+                <span class="comment-age">(27 Nov '11, 03:25)</span>
+                <a class="comment-user userinfo" href="http://www.aiqus.com/users/3079/tom-chappell">Tom Chappell</a>
+                <img class="gravatar" src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/502229f8b0f21a9b5a79ebb172edd9e4.jpg" alt="Tom%20Chappell's gravatar image" height="18" width="18">
+            </div>
+        </div>
+    
+</div>
+<div id="comment-tools-2206" class="comment-tools">
+    
+    
+</div>
+<div id="comment-2206-form-container" class="comment-form-container">
+    
+</div>
+    
+
+                        </div>
+                        
+                    </td>
+                </tr>
+            </tbody></table>
+            
+			
+			
+			
+		
+		<div style="text-align:center;">		
+	
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-8295897761072887";
+/* aiqus_footer_small_1 */
+google_ad_slot = "1846155606";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript" src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/show_ads.js">
+</script><ins style="display:inline-table;border:none;height:250px;margin:0;padding:0;position:relative;visibility:visible;width:300px"><ins id="aswift_1_anchor" style="display:block;border:none;height:250px;margin:0;padding:0;position:relative;visibility:visible;width:300px"><iframe marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){w.location.replace(h)}}" id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;" frameborder="0" height="250" scrolling="no" width="300"></iframe></ins></ins>
+
+		</div>
+				
+  
+			
+			
+			
+			
+            
+                <hr>
+                <div class="tabBar">
+                    <a name="sort-top"></a>
+                    <div class="headQuestions">
+                    7 Answers:
+                    </div>
+                    
+<div class="tabsA"><a href="http://www.aiqus.com/questions/2206/pacman-result-for-q7-too-good-to-be-true?sort=oldest" title="oldest answers will be shown first">oldest</a><a href="http://www.aiqus.com/questions/2206/pacman-result-for-q7-too-good-to-be-true?sort=newest" title="newest answers will be shown first">newest</a><a href="http://www.aiqus.com/questions/2206/pacman-result-for-q7-too-good-to-be-true?sort=votes" class="on" title="most voted answers will be shown first">most voted</a></div>
+
+                </div>
+                
+  
+                
+                    <a name="7644"></a>
+                    <div id="answer-container-7644" class="answer ">
+                        <table style="width:100%;">
+                            <tbody><tr>
+                                <td style="width:30px;vertical-align:top">
+                                    <div class="vote-buttons">
+                                        
+
+<a id="post-7644-upvote" title="I like this post (click again to cancel)" class="ajax-command post-vote up " href="http://www.aiqus.com/vote/7644/up/" rel="nofollow"> </a>
+<div id="post-7644-score" class="post-score" title="current number of votes">
+    2
+</div>
+<a id="post-7644-downvote" title="I dont like this post (click again to cancel)" class="ajax-command post-vote down" href="http://www.aiqus.com/vote/7644/down/" rel="nofollow"> </a>
+                                        
+
+
+    
+
+
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="item-right">
+                                        <div class="answer-body">
+                                            <p>I'd say your heuristic function is overfit to that one particular maze ;)</p>
+                                        </div>
+                                        <div class="answer-controls post-controls">
+                                            
+<span class="action-link"><a rel="nofollow" title="answer permanent link" class="ajax-command withprompt  copy" href="http://www.aiqus.com/answer_link/7644/">link</a></span>
+                                            
+
+
+                                        </div>
+                                        <div class="post-update-info-container">
+                                            
+<div class="post-update-info post-update-info-user">
+    <p style="line-height:12px;">
+        answered
+        <strong>31 Oct '11, 10:26</strong>
+    </p>
+    <img class="gravatar" src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/1f97f373864c25bae57726046160e20d.jpg" alt="rhasarub's gravatar image" height="32" width="32">
+    <p><a href="http://www.aiqus.com/users/627/rhasarub">rhasarub</a><br>
+    <span class="score" title="3953 karma"><span class="">4.0k</span></span><span title="5 badges"><span class="silver">●</span><span class="badgecount">5</span></span><span title="19 badges"><span class="bronze">●</span><span class="badgecount">19</span></span><br>
+    </p>
+</div>
+
+
+                                        </div>
+                                        
+
+
+<div class="comments-container" id="comments-container-7644">
+    
+        <a name="7650"></a>
+        <div class="comment" id="comment-7650">
+            <div id="post-7650-score" class="comment-score"></div>
+            <div class="comment-text">:D    Actually, that might be 
+partly true... It would work really well for similar mazes, those for 
+whom the manhattan distance is a huge under-measurement due to the 
+presence of long and narrow dead-end corridors...</div>
+            <div class="comment-info" id="comment-7650-info">
+                
+                
+                
+                
+                    
+
+                <span class="comment-age">(31 Oct '11, 10:54)</span>
+                <a class="comment-user userinfo" href="http://www.aiqus.com/users/559/aroberge">aroberge</a>
+                <img class="gravatar" src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/ca465da45735c9efed28478928fa9fbe_002.jpg" alt="aroberge's gravatar image" height="18" width="18">
+            </div>
+        </div>
+    
+</div>
+<div id="comment-tools-7644" class="comment-tools">
+    
+    
+</div>
+<div id="comment-7644-form-container" class="comment-form-container">
+    
+</div>
+    
+
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody></table>
+                    </div>
+                
+                    <a name="35213"></a>
+                    <div id="answer-container-35213" class="answer ">
+                        <table style="width:100%;">
+                            <tbody><tr>
+                                <td style="width:30px;vertical-align:top">
+                                    <div class="vote-buttons">
+                                        
+
+<a id="post-35213-upvote" title="I like this post (click again to cancel)" class="ajax-command post-vote up " href="http://www.aiqus.com/vote/35213/up/" rel="nofollow"> </a>
+<div id="post-35213-score" class="post-score" title="current number of votes">
+    1
+</div>
+<a id="post-35213-downvote" title="I dont like this post (click again to cancel)" class="ajax-command post-vote down" href="http://www.aiqus.com/vote/35213/down/" rel="nofollow"> </a>
+                                        
+
+
+    
+
+
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="item-right">
+                                        <div class="answer-body">
+                                            <p>Here is a graph of the 
+costs along the optimal path in trickySearch, with the estimated 
+remaining cost (heuristic) stacked above the computed cost (which is of 
+course linear). The heuristic is the aforementioned minimum spanning 
+tree (MST) length + cost to the closest food.</p>
+<p>Things to note are:</p>
+<ul>
+<li>the sum is monotonically non-decreasing (consistency)</li>
+<li>it never goes above the optimal path cost of 60 (admissibility); 
+this is implied by consistency and the fact that the heuristic is 0 in 
+the goal state</li>
+<li>increments of more than one unit (at steps 3 and 9) correspond to 
+the heuristic value increasing despite the fact we are one step closer 
+to the goal. This is actually a good thing, it means that the heuristic 
+comes closer to the actual remaining cost. </li>
+</ul>
+<p><img alt="stacked costs" src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/heuristic_1.PNG"></p>
+<p>Of course the graph doesn't prove anything. To prove consistency (or at least, to convince myself), this is my reasoning:</p>
+<ul>
+<li>if in the last move pacman doesn't eat a food, the heuristic can 
+decrease by at most one (the MST stays the same and the distance to the 
+closest food decrease by at most one).</li>
+<li>if pacman eats a food that is a leaf of the MST, the heuristic 
+decrease by one (since the length of the removed edge of the MST is 
+equal to the new distance to the closest food, which was 1 in the 
+previous step)</li>
+<li>if the eaten food (<em>F</em>) is not a leaf, let <em>n</em> be the number of neighbors of the eaten food in the MST. So you remove <em>n</em> edges from the MST and have to add <em>n-1</em> new edges back (since the MST is a tree, there is no loop, so you now have to reconnect <em>n</em> components, needing <em>n-1</em> new edges). For any edge you add, say between components <em>A</em> and <em>B</em>, with length <em>d(A,B)</em>, you have the following property: <em>d(A,B) &gt;= d(A,F)</em> and <em>d(A,B) &gt;= d(B,F)</em>. That follows from the property of the Minimum Spanning Tree: if you had <em>d(A,B) &lt; d(A,F)</em>,
+ then the AF edge wouldn't have been part of the MST in the first place,
+ since a smaller spanning tree would have been possible by replacing the
+ AF edge by that other edge between A and B. By putting all the 
+inequalities together, we can deduce that the length of the new minimum 
+spanning tree cannot decrease by more than the length of the smallest 
+edge leading to <em>F</em>, which is compensated by the new distance to 
+the closest food like in the previous case. Again, the heuristic cannot 
+decrease by more than 1, which was the distance to the closest food in 
+the previous step.</li>
+</ul>
+                                        </div>
+                                        <div class="answer-controls post-controls">
+                                            
+<span class="action-link"><a rel="nofollow" title="answer permanent link" class="ajax-command withprompt  copy" href="http://www.aiqus.com/answer_link/35213/">link</a></span>
+                                            
+
+
+                                        </div>
+                                        <div class="post-update-info-container">
+                                            
+<div class="post-update-info post-update-info-user">
+    <p style="line-height:12px;">
+        answered
+        <strong>17 Jan '12, 19:13</strong>
+    </p>
+    <img class="gravatar" src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/be9e5ceb285c972e70df28d43961b37a_002.png" alt="ibatugow's gravatar image" height="32" width="32">
+    <p><a href="http://www.aiqus.com/users/2477/ibatugow">ibatugow</a><br>
+    <span class="score" title="338 karma">338</span><span title="5 badges"><span class="bronze">●</span><span class="badgecount">5</span></span><br>
+    </p>
+</div>
+
+    <div class="post-update-info post-update-info-edited">
+        <p style="line-height:12px;">
+            <a href="http://www.aiqus.com/revisions/35213/">
+                edited
+                <strong>17 Jan '12, 19:17</strong>
+            </a>
+        </p>
+        
+    </div>
+
+
+                                        </div>
+                                        
+
+
+<div class="comments-container" id="comments-container-35213">
+    
+</div>
+<div id="comment-tools-35213" class="comment-tools">
+    
+    
+</div>
+<div id="comment-35213-form-container" class="comment-form-container">
+    
+</div>
+    
+
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody></table>
+                    </div>
+                
+                    <a name="2330"></a>
+                    <div id="answer-container-2330" class="answer ">
+                        <table style="width:100%;">
+                            <tbody><tr>
+                                <td style="width:30px;vertical-align:top">
+                                    <div class="vote-buttons">
+                                        
+
+<a id="post-2330-upvote" title="I like this post (click again to cancel)" class="ajax-command post-vote up " href="http://www.aiqus.com/vote/2330/up/" rel="nofollow"> </a>
+<div id="post-2330-score" class="post-score" title="current number of votes">
+    0
+</div>
+<a id="post-2330-downvote" title="I dont like this post (click again to cancel)" class="ajax-command post-vote down" href="http://www.aiqus.com/vote/2330/down/" rel="nofollow"> </a>
+                                        
+
+
+    
+
+
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="item-right">
+                                        <div class="answer-body">
+                                            <p><a rel="nofollow" href="http://www.aiqus.com/users/488/gbayliss"></a><a rel="nofollow" href="http://www.aiqus.com/users/488/gbayliss">@gbayliss</a> Stanford course downloads are on the course schedule <a rel="nofollow" href="http://robots.stanford.edu/cs221/schedule.html">here</a> but already the lecture 1 link is busted.
+<a rel="nofollow" href="http://www.aiqus.com/users/559/aroberge"></a><a rel="nofollow" href="http://www.aiqus.com/users/559/aroberge">@aroberge</a> Can you offer any tips for installing cs221 code and Python - was it easy to get working?<br>
+</p>
+                                        </div>
+                                        <div class="answer-controls post-controls">
+                                            
+<span class="action-link"><a rel="nofollow" title="answer permanent link" class="ajax-command withprompt  copy" href="http://www.aiqus.com/answer_link/2330/">link</a></span>
+                                            
+
+
+                                        </div>
+                                        <div class="post-update-info-container">
+                                            
+<div class="post-update-info post-update-info-user">
+    <p style="line-height:12px;">
+        answered
+        <strong>16 Oct '11, 09:25</strong>
+    </p>
+    <img class="gravatar" src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/4fc158a63f4728d21a15d01304059722_002.png" alt="martinhumby's gravatar image" height="32" width="32">
+    <p><a href="http://www.aiqus.com/users/1229/martinhumby">martinhumby</a><br>
+    <span class="score" title="237 karma">237</span><span title="8 badges"><span class="bronze">●</span><span class="badgecount">8</span></span><br>
+    </p>
+</div>
+
+    <div class="post-update-info post-update-info-edited">
+        <p style="line-height:12px;">
+            <a href="http://www.aiqus.com/revisions/2330/">
+                edited
+                <strong>16 Oct '11, 09:26</strong>
+            </a>
+        </p>
+        
+    </div>
+
+
+                                        </div>
+                                        
+
+
+<div class="comments-container" id="comments-container-2330">
+    
+        <a name="2335"></a>
+        <div class="comment" id="comment-2335">
+            <div id="post-2335-score" class="comment-score"></div>
+            <div class="comment-text">Python is extremely easy to install.  If you have a Mac or a Linux box, it should be there already.  If not, head to <a href="http://python.org/" rel="nofollow">python.org</a>
+ and follow the links.  As for "installing" the code, you simply have to
+ download it, unzip it somewhere.  Simply typing "python a_program.py" 
+will run it - no installation step needed.</div>
+            <div class="comment-info" id="comment-2335-info">
+                
+                
+                
+                
+                    
+
+                <span class="comment-age">(16 Oct '11, 09:37)</span>
+                <a class="comment-user userinfo" href="http://www.aiqus.com/users/559/aroberge">aroberge</a>
+                <img class="gravatar" src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/ca465da45735c9efed28478928fa9fbe_002.jpg" alt="aroberge's gravatar image" height="18" width="18">
+            </div>
+        </div>
+    
+        <a name="3504"></a>
+        <div class="comment" id="comment-3504">
+            <div id="post-3504-score" class="comment-score"></div>
+            <div class="comment-text">I should have clarified what I 
+meant about installing the code: I was referring to the code samples for
+ the assignment - not Python itself.</div>
+            <div class="comment-info" id="comment-3504-info">
+                
+                
+                
+                
+                    
+
+                <span class="comment-age">(18 Oct '11, 11:10)</span>
+                <a class="comment-user userinfo" href="http://www.aiqus.com/users/559/aroberge">aroberge</a>
+                <img class="gravatar" src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/ca465da45735c9efed28478928fa9fbe_002.jpg" alt="aroberge's gravatar image" height="18" width="18">
+            </div>
+        </div>
+    
+        <a name="3770"></a>
+        <div class="comment" id="comment-3770">
+            <div id="post-3770-score" class="comment-score"></div>
+            <div class="comment-text">Thanks for your help, sorry not 
+replying earlier. Loaded pacman under Ubuntu on VirtualBox. Great stuff 
+but going to find getting to grips with the Python code hard - untyped 
+variables makes understanding harder I think.</div>
+            <div class="comment-info" id="comment-3770-info">
+                
+                
+                
+                
+                    
+
+                <span class="comment-age">(18 Oct '11, 19:12)</span>
+                <a class="comment-user userinfo" href="http://www.aiqus.com/users/1229/martinhumby">martinhumby</a>
+                <img class="gravatar" src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/4fc158a63f4728d21a15d01304059722.png" alt="martinhumby's gravatar image" height="18" width="18">
+            </div>
+        </div>
+    
+</div>
+<div id="comment-tools-2330" class="comment-tools">
+    
+    
+</div>
+<div id="comment-2330-form-container" class="comment-form-container">
+    
+</div>
+    
+
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody></table>
+                    </div>
+                
+                    <a name="2562"></a>
+                    <div id="answer-container-2562" class="answer ">
+                        <table style="width:100%;">
+                            <tbody><tr>
+                                <td style="width:30px;vertical-align:top">
+                                    <div class="vote-buttons">
+                                        
+
+<a id="post-2562-upvote" title="I like this post (click again to cancel)" class="ajax-command post-vote up " href="http://www.aiqus.com/vote/2562/up/" rel="nofollow"> </a>
+<div id="post-2562-score" class="post-score" title="current number of votes">
+    0
+</div>
+<a id="post-2562-downvote" title="I dont like this post (click again to cancel)" class="ajax-command post-vote down" href="http://www.aiqus.com/vote/2562/down/" rel="nofollow"> </a>
+                                        
+
+
+    
+
+
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="item-right">
+                                        <div class="answer-body">
+                                            <p>I have a similar issue 
+with Q4, my implementation of a-star seems to find the correct solution 
+much faster than stated in the problem. With the null heuristic, my 
+a-star finds the best solution in 435 nodes when they say 549.</p>
+                                        </div>
+                                        <div class="answer-controls post-controls">
+                                            
+<span class="action-link"><a rel="nofollow" title="answer permanent link" class="ajax-command withprompt  copy" href="http://www.aiqus.com/answer_link/2562/">link</a></span>
+                                            
+
+
+                                        </div>
+                                        <div class="post-update-info-container">
+                                            
+<div class="post-update-info post-update-info-user">
+    <p style="line-height:12px;">
+        answered
+        <strong>16 Oct '11, 20:11</strong>
+    </p>
+    <img class="gravatar" src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/e1f5040542f6a8b325bc45f3707a9ec2_002.png" alt="Benoit%20Ambry's gravatar image" height="32" width="32">
+    <p><a href="http://www.aiqus.com/users/1361/benoit-ambry">Benoit Ambry</a><br>
+    <span class="score" title="156 karma">156</span><span title="6 badges"><span class="bronze">●</span><span class="badgecount">6</span></span><br>
+    </p>
+</div>
+
+    <div class="post-update-info post-update-info-edited">
+        <p style="line-height:12px;">
+            <a href="http://www.aiqus.com/revisions/2562/">
+                edited
+                <strong>16 Oct '11, 20:13</strong>
+            </a>
+        </p>
+        
+    </div>
+
+
+                                        </div>
+                                        
+
+
+<div class="comments-container" id="comments-container-2562">
+    
+        <a name="2567"></a>
+        <div class="comment" id="comment-2567">
+            <div id="post-2567-score" class="comment-score"></div>
+            <div class="comment-text">For me, it's 538 nodes expanded - 
+much closer to theirs.   I can see a difference in a few nodes, given a 
+choice of "left" vs "right" branch for choosing successors, but I am 
+puzzled as to how yours is so much lower.   In the case I wrote about, 
+it's all due to a "clever" choice of heuristics - where I get at least 
+an order of magnitude difference better than what could be expected...</div>
+            <div class="comment-info" id="comment-2567-info">
+                
+                
+                
+                
+                    
+
+                <span class="comment-age">(16 Oct '11, 20:25)</span>
+                <a class="comment-user userinfo" href="http://www.aiqus.com/users/559/aroberge">aroberge</a>
+                <img class="gravatar" src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/ca465da45735c9efed28478928fa9fbe_002.jpg" alt="aroberge's gravatar image" height="18" width="18">
+            </div>
+        </div>
+    
+        <a name="2572"></a>
+        <div class="comment" id="comment-2572">
+            <div id="post-2572-score" class="comment-score">1</div>
+            <div class="comment-text">No, I have a bug, that is clear. I
+ think it is missing some of the branches and it finds the proper 
+solution by luck. The null heuristic always returns 0.
+I found actually, I wrote f(n) = h(n) instead of f(n) = g(n) + h(n). now
+ I have 538!</div>
+            <div class="comment-info" id="comment-2572-info">
+                
+                
+                
+                
+                    
+
+                <span class="comment-age">(16 Oct '11, 20:35)</span>
+                <a class="comment-user userinfo" href="http://www.aiqus.com/users/1361/benoit-ambry">Benoit Ambry</a>
+                <img class="gravatar" src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/e1f5040542f6a8b325bc45f3707a9ec2.png" alt="Benoit%20Ambry's gravatar image" height="18" width="18">
+            </div>
+        </div>
+    
+        <a name="2574"></a>
+        <div class="comment" id="comment-2574">
+            <div id="post-2574-score" class="comment-score"></div>
+            <div class="comment-text">If you are like me, you may find it useful to include a check like:
+.        if h_cost - new_h_cost &gt; successor[2]:
+.           print "consistency problem", h_cost, new_h_cost, successor[0]
+in your A-star code.  This helped me identify some errors in my heuristic functions.</div>
+            <div class="comment-info" id="comment-2574-info">
+                
+                
+                
+                
+                    
+
+                <span class="comment-age">(16 Oct '11, 20:41)</span>
+                <a class="comment-user userinfo" href="http://www.aiqus.com/users/559/aroberge">aroberge</a>
+                <img class="gravatar" src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/ca465da45735c9efed28478928fa9fbe_002.jpg" alt="aroberge's gravatar image" height="18" width="18">
+            </div>
+        </div>
+    
+        <a name="2576"></a>
+        <div class="comment" id="comment-2576">
+            <div id="post-2576-score" class="comment-score"></div>
+            <div class="comment-text">Yeah I have that already, I'm on Q6 and a bad heuristic can really take the a-star algo down.</div>
+            <div class="comment-info" id="comment-2576-info">
+                
+                
+                
+                
+                    
+
+                <span class="comment-age">(16 Oct '11, 20:44)</span>
+                <a class="comment-user userinfo" href="http://www.aiqus.com/users/1361/benoit-ambry">Benoit Ambry</a>
+                <img class="gravatar" src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/e1f5040542f6a8b325bc45f3707a9ec2.png" alt="Benoit%20Ambry's gravatar image" height="18" width="18">
+            </div>
+        </div>
+    
+        <a name="17808"></a>
+        <div class="comment" id="comment-17808">
+            <div id="post-17808-score" class="comment-score"></div>
+            <div class="comment-text">Huh, that's funny that you guys 
+are both getting 538 nodes expanded on this one.  I got 549 nodes 
+expanded with the manhattanHeuristic, the same as they predicted.</div>
+            <div class="comment-info" id="comment-17808-info">
+                
+                
+                
+                
+                    
+
+                <span class="comment-age">(27 Nov '11, 03:36)</span>
+                <a class="comment-user userinfo" href="http://www.aiqus.com/users/3079/tom-chappell">Tom Chappell</a>
+                <img class="gravatar" src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/502229f8b0f21a9b5a79ebb172edd9e4.jpg" alt="Tom%20Chappell's gravatar image" height="18" width="18">
+            </div>
+        </div>
+    
+</div>
+<div id="comment-tools-2562" class="comment-tools">
+    
+    
+</div>
+<div id="comment-2562-form-container" class="comment-form-container">
+    
+</div>
+    
+
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody></table>
+                    </div>
+                
+                    <a name="7582"></a>
+                    <div id="answer-container-7582" class="answer ">
+                        <table style="width:100%;">
+                            <tbody><tr>
+                                <td style="width:30px;vertical-align:top">
+                                    <div class="vote-buttons">
+                                        
+
+<a id="post-7582-upvote" title="I like this post (click again to cancel)" class="ajax-command post-vote up " href="http://www.aiqus.com/vote/7582/up/" rel="nofollow"> </a>
+<div id="post-7582-score" class="post-score" title="current number of votes">
+    0
+</div>
+<a id="post-7582-downvote" title="I dont like this post (click again to cancel)" class="ajax-command post-vote down" href="http://www.aiqus.com/vote/7582/down/" rel="nofollow"> </a>
+                                        
+
+
+    
+
+
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="item-right">
+                                        <div class="answer-body">
+                                            <p>I have had a few 
+seemingly ok heuristics for Q7 - one that finds the optimal solution 
+with 10849 expanded nodes, one that finds an almost optimal solution in 
+7389 expanded nodes. (The heuristics are taking topology of the maze 
+into account)</p>
+<p>However, on mediumSearch, the only solutions I could find before my 
+computer melted (rather, ran out of memory) were clearly suboptimal 
+solutions (pacmans oscillating left and right in the maze, eating a few 
+dots on the rigth, turning around, nibbling on the left and back again) 
+that were found in less than 20'000 expanded notes. The heuristics were 
+not admissable for those.</p>
+<p>Question: Has anyone found a heuristic that solves mediumSearch 
+optimally and finishes in finite time / memory? I have an idea for a 
+solution, but that would require a totally different solution state. I 
+have already spent way too much time on this heuristic and would like to
+ know if there's hope to actually solve it.</p>
+                                        </div>
+                                        <div class="answer-controls post-controls">
+                                            
+<span class="action-link"><a rel="nofollow" title="answer permanent link" class="ajax-command withprompt  copy" href="http://www.aiqus.com/answer_link/7582/">link</a></span>
+                                            
+
+
+                                        </div>
+                                        <div class="post-update-info-container">
+                                            
+<div class="post-update-info post-update-info-user">
+    <p style="line-height:12px;">
+        answered
+        <strong>31 Oct '11, 05:19</strong>
+    </p>
+    <img class="gravatar" src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/aa7fab50f228b52b65f247962fbc09b8_002.jpg" alt="jcfischer's gravatar image" height="32" width="32">
+    <p><a href="http://www.aiqus.com/users/1348/jcfischer">jcfischer</a><br>
+    <span class="score" title="16 karma">16</span><span title="2 badges"><span class="bronze">●</span><span class="badgecount">2</span></span><br>
+    </p>
+</div>
+
+
+                                        </div>
+                                        
+
+
+<div class="comments-container" id="comments-container-7582">
+    
+        <a name="7593"></a>
+        <div class="comment" id="comment-7593">
+            <div id="post-7593-score" class="comment-score"></div>
+            <div class="comment-text">So I have a heuristic that works 
+in all mazes but mediumSearch and bigSearch. (trickySearch with optimal 
+solution in 9615 expanded nodes). Would be interesting to hear from 
+others how they are faring. I suspect that my heuristic would solve 
+mediumSearch, but I haven't been able to run it to completion.</div>
+            <div class="comment-info" id="comment-7593-info">
+                
+                
+                
+                
+                    
+
+                <span class="comment-age">(31 Oct '11, 06:00)</span>
+                <a class="comment-user userinfo" href="http://www.aiqus.com/users/1348/jcfischer">jcfischer</a>
+                <img class="gravatar" src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/aa7fab50f228b52b65f247962fbc09b8.jpg" alt="jcfischer's gravatar image" height="18" width="18">
+            </div>
+        </div>
+    
+        <a name="7657"></a>
+        <div class="comment" id="comment-7657">
+            <div id="post-7657-score" class="comment-score"></div>
+            <div class="comment-text">I have run mediumSearch with my heuristic and it didn't complete before it ate up 6 GB of memory...</div>
+            <div class="comment-info" id="comment-7657-info">
+                
+                
+                
+                
+                    
+
+                <span class="comment-age">(31 Oct '11, 11:27)</span>
+                <a class="comment-user userinfo" href="http://www.aiqus.com/users/1348/jcfischer">jcfischer</a>
+                <img class="gravatar" src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/aa7fab50f228b52b65f247962fbc09b8.jpg" alt="jcfischer's gravatar image" height="18" width="18">
+            </div>
+        </div>
+    
+        <a name="8015"></a>
+        <div class="comment" id="comment-8015">
+            <div id="post-8015-score" class="comment-score"></div>
+            <div class="comment-text">found a really good article about heuristics for A* search and how it influences the speed and accuracy of the search: <a href="http://theory.stanford.edu/%7Eamitp/GameProgramming/Heuristics.html" rel="nofollow">http://theory.stanford.edu/~amitp/GameProgramming/Heuristics.html</a></div>
+            <div class="comment-info" id="comment-8015-info">
+                
+                
+                
+                
+                    
+
+                <span class="comment-age">(01 Nov '11, 12:47)</span>
+                <a class="comment-user userinfo" href="http://www.aiqus.com/users/1348/jcfischer">jcfischer</a>
+                <img class="gravatar" src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/aa7fab50f228b52b65f247962fbc09b8.jpg" alt="jcfischer's gravatar image" height="18" width="18">
+            </div>
+        </div>
+    
+</div>
+<div id="comment-tools-7582" class="comment-tools">
+    
+    
+</div>
+<div id="comment-7582-form-container" class="comment-form-container">
+    
+</div>
+    
+
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody></table>
+                    </div>
+                
+                    <a name="17773"></a>
+                    <div id="answer-container-17773" class="answer ">
+                        <table style="width:100%;">
+                            <tbody><tr>
+                                <td style="width:30px;vertical-align:top">
+                                    <div class="vote-buttons">
+                                        
+
+<a id="post-17773-upvote" title="I like this post (click again to cancel)" class="ajax-command post-vote up " href="http://www.aiqus.com/vote/17773/up/" rel="nofollow"> </a>
+<div id="post-17773-score" class="post-score" title="current number of votes">
+    0
+</div>
+<a id="post-17773-downvote" title="I dont like this post (click again to cancel)" class="ajax-command post-vote down" href="http://www.aiqus.com/vote/17773/down/" rel="nofollow"> </a>
+                                        
+
+
+    
+
+
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="item-right">
+                                        <div class="answer-body">
+                                            <p>Mine does Q7 with 5893 nodes expanded... What are other peoples' results? (Mine completes in 1.2 seconds)
+I have Q4 as 547 nodes expanded with a "total cost of 210".</p>
+<p><a rel="nofollow" href="http://www.aiqus.com/users/559/aroberge">@aroberge</a> I'm interested in your check for consistency... What is h_cost and what is new_h_cost?</p>
+                                        </div>
+                                        <div class="answer-controls post-controls">
+                                            
+<span class="action-link"><a rel="nofollow" title="answer permanent link" class="ajax-command withprompt  copy" href="http://www.aiqus.com/answer_link/17773/">link</a></span>
+                                            
+
+
+                                        </div>
+                                        <div class="post-update-info-container">
+                                            
+<div class="post-update-info post-update-info-user">
+    <p style="line-height:12px;">
+        answered
+        <strong>27 Nov '11, 01:34</strong>
+    </p>
+    <img class="gravatar" src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/a97f00122118b5e93093b2cd5d02b0c8.png" alt="bnsh's gravatar image" height="32" width="32">
+    <p><a href="http://www.aiqus.com/users/3103/bnsh">bnsh</a><br>
+    <span class="score" title="795 karma">795</span><span title="13 badges"><span class="bronze">●</span><span class="badgecount">13</span></span><br>
+    </p>
+</div>
+
+
+                                        </div>
+                                        
+
+
+<div class="comments-container" id="comments-container-17773">
+    
+        <a name="17775"></a>
+        <div class="comment" id="comment-17775">
+            <div id="post-17775-score" class="comment-score"></div>
+            <div class="comment-text">Actually... I think I see. So, 
+h_cost is the heuristic of the current position, and new_h_cost must be 
+the heuristic for the successor... I am curious if my heuristic for Q7 
+is inconsistent or not, given how easy it was to get 5893 as an answer. 
+More later.</div>
+            <div class="comment-info" id="comment-17775-info">
+                
+                
+                
+                
+                    
+
+                <span class="comment-age">(27 Nov '11, 01:41)</span>
+                <a class="comment-user userinfo" href="http://www.aiqus.com/users/3103/bnsh">bnsh</a>
+                <img class="gravatar" src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/a97f00122118b5e93093b2cd5d02b0c8_002.png" alt="bnsh's gravatar image" height="18" width="18">
+            </div>
+        </div>
+    
+        <a name="17776"></a>
+        <div class="comment" id="comment-17776">
+            <div id="post-17776-score" class="comment-score"></div>
+            <div class="comment-text">Yep! Sure enough! Consistency problems! Damnit! hehe...</div>
+            <div class="comment-info" id="comment-17776-info">
+                
+                
+                
+                
+                    
+
+                <span class="comment-age">(27 Nov '11, 01:43)</span>
+                <a class="comment-user userinfo" href="http://www.aiqus.com/users/3103/bnsh">bnsh</a>
+                <img class="gravatar" src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/a97f00122118b5e93093b2cd5d02b0c8_002.png" alt="bnsh's gravatar image" height="18" width="18">
+            </div>
+        </div>
+    
+        <a name="17825"></a>
+        <div class="comment" id="comment-17825">
+            <div id="post-17825-score" class="comment-score"></div>
+            <div class="comment-text">For Q7, I got:
+6,110 nodes expanded, total cost  60 (trickySearch)
+  414 nodes expanded, total cost  27 (tinySearch)
+
+For Q4, I got:
+  549 nodes expanded, total cost 210
+
+(I've got the heuristic consistency check in my aStarSearch)</div>
+            <div class="comment-info" id="comment-17825-info">
+                
+                
+                
+                
+                    
+
+                <span class="comment-age">(27 Nov '11, 04:14)</span>
+                <a class="comment-user userinfo" href="http://www.aiqus.com/users/3079/tom-chappell">Tom Chappell</a>
+                <img class="gravatar" src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/502229f8b0f21a9b5a79ebb172edd9e4.jpg" alt="Tom%20Chappell's gravatar image" height="18" width="18">
+            </div>
+        </div>
+    
+        <a name="17830"></a>
+        <div class="comment" id="comment-17830">
+            <div id="post-17830-score" class="comment-score"></div>
+            <div class="comment-text">Q7: (tricky search) 60 cost, 215 
+expanded in 0.1 seconds. Consistency is guarantied by heuristic 
+construction. However, I've inserted code to check for consistency on 
+each step. No warnings so far. 
+tinySearch - 27 cost, 52 expanded. smallSearch - 34 cost, 57 expanded.
+Heuristic is O(n^3), where n is a number of food dots.</div>
+            <div class="comment-info" id="comment-17830-info">
+                
+                
+                
+                
+                    
+
+                <span class="comment-age">(27 Nov '11, 04:33)</span>
+                <a class="comment-user userinfo" href="http://www.aiqus.com/users/3003/red75prim">red75prim</a>
+                <img class="gravatar" src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/49fe99699df3321527dd632c68cae307.png" alt="red75prim's gravatar image" height="18" width="18">
+            </div>
+        </div>
+    
+        <a name="34712"></a>
+        <div class="comment" id="comment-34712">
+            <div id="post-34712-score" class="comment-score"></div>
+            <div class="comment-text">In Q7 my best score in trickySearch is:
+Path found with total cost of 60 in 1.6 seconds
+Search nodes expanded: 1130
+@red75prim
+I'm interested in what heuristic you used. Could we contact by email? (It should appear in my profile)</div>
+            <div class="comment-info" id="comment-34712-info">
+                
+                
+                
+                
+                    
+
+                <span class="comment-age">(04 Jan '12, 17:47)</span>
+                <a class="comment-user userinfo" href="http://www.aiqus.com/users/4251/maacruz">maacruz</a>
+                <img class="gravatar" src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/8a4e5b6c7c1d79967382761981570f51_002.png" alt="maacruz's gravatar image" height="18" width="18">
+            </div>
+        </div>
+    
+        <a name="34733"></a>
+        <div class="comment" id="comment-34733">
+            <div id="post-34733-score" class="comment-score"></div>
+            <div class="comment-text">@maacruz, I can't see your email. 
+However, I can give a hint: consider the length of minimum spanning tree
+ for remaining food dots.
+BTW, I implemented slightly different priority queue to get 215 expanded
+ nodes. If program uses util.PriorityQueue, then it expands 255 nodes.</div>
+            <div class="comment-info" id="comment-34733-info">
+                
+                
+                
+                
+                    
+
+                <span class="comment-age">(05 Jan '12, 03:52)</span>
+                <a class="comment-user userinfo" href="http://www.aiqus.com/users/3003/red75prim">red75prim</a>
+                <img class="gravatar" src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/49fe99699df3321527dd632c68cae307.png" alt="red75prim's gravatar image" height="18" width="18">
+            </div>
+        </div>
+    
+        <a name="34737"></a>
+        <div class="comment" id="comment-34737">
+            <div id="post-34737-score" class="comment-score"></div>
+            <div class="comment-text">@red75prim: Hey, I did the same 
+thing ! Length of minimumum spanning tree (using maze distances) + 
+distance to closest food. 247 nodes expanded with the stock 
+util.PriorityQueue in 0.1 s. I used Dijkstra and a cache to speed up the
+ calculations.</div>
+            <div class="comment-info" id="comment-34737-info">
+                
+                
+                
+                
+                    
+
+                <span class="comment-age">(05 Jan '12, 06:19)</span>
+                <a class="comment-user userinfo" href="http://www.aiqus.com/users/2477/ibatugow">ibatugow</a>
+                <img class="gravatar" src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/be9e5ceb285c972e70df28d43961b37a.png" alt="ibatugow's gravatar image" height="18" width="18">
+            </div>
+        </div>
+    
+        <a name="34738"></a>
+        <div class="comment" id="comment-34738">
+            <div id="post-34738-score" class="comment-score"></div>
+            <div class="comment-text">@ibatugow. Cache, yes, but I was too lazy to implement Dijkstra's algo... 
+[Staring at source code]
+Well, yes, it's Dijkstra (BFS + tuned getSuccessors).</div>
+            <div class="comment-info" id="comment-34738-info">
+                
+                
+                
+                
+                    
+
+                <span class="comment-age">(05 Jan '12, 07:29)</span>
+                <a class="comment-user userinfo" href="http://www.aiqus.com/users/3003/red75prim">red75prim</a>
+                <img class="gravatar" src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/49fe99699df3321527dd632c68cae307.png" alt="red75prim's gravatar image" height="18" width="18">
+            </div>
+        </div>
+    
+        <a name="35177"></a>
+        <div class="comment" id="comment-35177">
+            <div id="post-35177-score" class="comment-score"></div>
+            <div class="comment-text">Thanks! But I think it is an 
+inconsistent heuristic (I can think of one such a tree where you remove a
+ node and the resulting total length then is greater), or I'm not making
+ the right approach (my implementation is inconsistent). My email is 
+maacruz in gmail.</div>
+            <div class="comment-info" id="comment-35177-info">
+                
+                
+                
+                
+                    
+
+                <span class="comment-age">(16 Jan '12, 18:38)</span>
+                <a class="comment-user userinfo" href="http://www.aiqus.com/users/4251/maacruz">maacruz</a>
+                <img class="gravatar" src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/8a4e5b6c7c1d79967382761981570f51_002.png" alt="maacruz's gravatar image" height="18" width="18">
+            </div>
+        </div>
+    
+        <a name="35187"></a>
+        <div class="comment" id="comment-35187">
+            <div id="post-35187-score" class="comment-score"></div>
+            <div class="comment-text">Looking back... 
+With my first approach for Q7,  TrickySearch I got:
+5380 nodes expanded, total path cost 60, in 1.8 seconds
+A solution with 215 nodes expanded is pretty impressive. I am also curious about the approach taken here.</div>
+            <div class="comment-info" id="comment-35187-info">
+                
+                
+                
+                
+                    
+
+                <span class="comment-age">(16 Jan '12, 21:36)</span>
+                <a class="comment-user userinfo" href="http://www.aiqus.com/users/2281/egoots">egoots</a>
+                <img class="gravatar" src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/98808e4f84853762627162892022944d.png" alt="egoots's gravatar image" height="18" width="18">
+            </div>
+        </div>
+    
+        <a name="35211"></a>
+        <div class="comment" id="comment-35211">
+            <div id="post-35211-score" class="comment-score"></div>
+            <div class="comment-text">Finally got it. Needed a small trick (which I had used in my previous heuristic) with packman to solve the inconsistency.
+255 nodes expanded in trickySearch in 1.4 seconds (completely unoptimized although I cache things)</div>
+            <div class="comment-info" id="comment-35211-info">
+                
+                
+                
+                
+                    
+
+                <span class="comment-age">(17 Jan '12, 18:38)</span>
+                <a class="comment-user userinfo" href="http://www.aiqus.com/users/4251/maacruz">maacruz</a>
+                <img class="gravatar" src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/8a4e5b6c7c1d79967382761981570f51_002.png" alt="maacruz's gravatar image" height="18" width="18">
+            </div>
+        </div>
+    
+        <a name="35212"></a>
+        <div class="comment" id="comment-35212">
+            <div id="post-35212-score" class="comment-score"></div>
+            <div class="comment-text">maacruz: could you email me?  myusername at gmail dot com</div>
+            <div class="comment-info" id="comment-35212-info">
+                
+                
+                
+                
+                    
+
+                <span class="comment-age">(17 Jan '12, 18:42)</span>
+                <a class="comment-user userinfo" href="http://www.aiqus.com/users/559/aroberge">aroberge</a>
+                <img class="gravatar" src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/ca465da45735c9efed28478928fa9fbe_002.jpg" alt="aroberge's gravatar image" height="18" width="18">
+            </div>
+        </div>
+    
+        <a name="42027"></a>
+        <div class="comment" id="comment-42027">
+            <div id="post-42027-score" class="comment-score"></div>
+            <div class="comment-text">Anyone have pointers on how to actually implement the MST based on a maze?</div>
+            <div class="comment-info" id="comment-42027-info">
+                
+                
+                
+                
+                    
+
+                <span class="comment-age">(07 Feb, 19:45)</span>
+                <a class="comment-user userinfo" href="http://www.aiqus.com/users/135259/astarc">AstarC</a>
+                <img class="gravatar" src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/c86368bc5c7c7ef6cbc1ccc6db0d6fd6.png" alt="AstarC's gravatar image" height="18" width="18">
+            </div>
+        </div>
+    
+</div>
+<div id="comment-tools-17773" class="comment-tools">
+    
+    
+</div>
+<div id="comment-17773-form-container" class="comment-form-container">
+    
+</div>
+    
+
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody></table>
+                    </div>
+                
+                    <a name="35176"></a>
+                    <div id="answer-container-35176" class="answer ">
+                        <table style="width:100%;">
+                            <tbody><tr>
+                                <td style="width:30px;vertical-align:top">
+                                    <div class="vote-buttons">
+                                        
+
+<a id="post-35176-upvote" title="I like this post (click again to cancel)" class="ajax-command post-vote up " href="http://www.aiqus.com/vote/35176/up/" rel="nofollow"> </a>
+<div id="post-35176-score" class="post-score" title="current number of votes">
+    0
+</div>
+<a id="post-35176-downvote" title="I dont like this post (click again to cancel)" class="ajax-command post-vote down" href="http://www.aiqus.com/vote/35176/down/" rel="nofollow"> </a>
+                                        
+
+
+    
+
+
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="item-right">
+                                        <div class="answer-body">
+                                            <p>Thanks! But I think it is
+ an inconsistent heuristic (I can think of one such a tree where you 
+remove a node and the resulting total length then is greater), or I'm 
+not making the right approach (my implementation is inconsistent).
+My email is maacruz in gmail.</p>
+                                        </div>
+                                        <div class="answer-controls post-controls">
+                                            
+<span class="action-link"><a rel="nofollow" title="answer permanent link" class="ajax-command withprompt  copy" href="http://www.aiqus.com/answer_link/35176/">link</a></span>
+                                            
+
+
+                                        </div>
+                                        <div class="post-update-info-container">
+                                            
+<div class="post-update-info post-update-info-user">
+    <p style="line-height:12px;">
+        answered
+        <strong>16 Jan '12, 18:38</strong>
+    </p>
+    <img class="gravatar" src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/8a4e5b6c7c1d79967382761981570f51.png" alt="maacruz's gravatar image" height="32" width="32">
+    <p><a href="http://www.aiqus.com/users/4251/maacruz">maacruz</a><br>
+    <span class="score" title="217 karma">217</span><span title="9 badges"><span class="bronze">●</span><span class="badgecount">9</span></span><br>
+    </p>
+</div>
+
+
+                                        </div>
+                                        
+
+
+<div class="comments-container" id="comments-container-35176">
+    
+        <a name="35194"></a>
+        <div class="comment" id="comment-35194">
+            <div id="post-35194-score" class="comment-score"></div>
+            <div class="comment-text">Yes, the heuristic value can 
+increase, but what the consistency condition says is that the (cost up 
+to now + heuristic value) cannot decrease. In other words, the estimated
+ remaining cost cannot decrease faster than the computed cost increase. 
+It doesn't preclude the heuristic function to increase, as long as it 
+stays admissible (i.e., not larger than the remaining optimal cost).</div>
+            <div class="comment-info" id="comment-35194-info">
+                
+                
+                
+                
+                    
+
+                <span class="comment-age">(17 Jan '12, 05:08)</span>
+                <a class="comment-user userinfo" href="http://www.aiqus.com/users/2477/ibatugow">ibatugow</a>
+                <img class="gravatar" src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/be9e5ceb285c972e70df28d43961b37a.png" alt="ibatugow's gravatar image" height="18" width="18">
+            </div>
+        </div>
+    
+</div>
+<div id="comment-tools-35176" class="comment-tools">
+    
+    
+</div>
+<div id="comment-35176-form-container" class="comment-form-container">
+    
+</div>
+    
+
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody></table>
+                    </div>
+                
+                <div class="paginator-container-left">
+                    
+                </div>
+            
+        <form id="fmanswer" action="/questions/2206/answer/" method="post"><div style="display:none;"><input id="csrfmiddlewaretoken" name="csrfmiddlewaretoken" value="682411cf949cb7c4bb31f2d14f52b0a0" type="hidden"></div>
+            <div style="display:none"><input name="csrfmiddlewaretoken" value="682411cf949cb7c4bb31f2d14f52b0a0" type="hidden"></div>
+            <div style="clear:both">
+            </div>
+			
+	
+	
+	
+	
+	
+	
+            
+            
+                <div style="padding:10px 0 0 0;">
+                    <div class="headNormal">
+                        
+                            Your answer
+                        
+                    </div>
+                </div>
+                
+
+                <div id="description" class="">
+                    <div id="wmd-button-bar" class="wmd-panel"><ul id="wmd-button-row"><li style="background-position: 0px 0px;" title="Strong &lt;strong&gt; Ctrl+B" id="wmd-bold-button" class="wmd-button"></li><li style="background-position: -20px 0px;" title="Emphasis &lt;em&gt; Ctrl+I" id="wmd-italic-button" class="wmd-button"></li><li id="wmd-spacer1" class="wmd-spacer"></li><li style="background-position: -40px 0px;" title="Hyperlink &lt;a&gt; Ctrl+L" id="wmd-link-button" class="wmd-button"></li><li style="background-position: -60px 0px;" title="Blockquote &lt;blockquote&gt; Ctrl+Q" id="wmd-quote-button" class="wmd-button"></li><li style="background-position: -80px 0px;" title="Code Sample &lt;pre&gt;&lt;code&gt; Ctrl+K" id="wmd-code-button" class="wmd-button"></li><li style="background-position: -100px 0px;" title="Image &lt;img&gt; Ctrl+G" id="wmd-image-button" class="wmd-button"></li><li id="wmd-spacer2" class="wmd-spacer"></li><li style="background-position: -120px 0px;" title="Numbered List &lt;ol&gt; Ctrl+O" id="wmd-olist-button" class="wmd-button"></li><li style="background-position: -140px 0px;" title="Bulleted List &lt;ul&gt; Ctrl+U" id="wmd-ulist-button" class="wmd-button"></li><li style="background-position: -160px 0px;" title="Heading &lt;h1&gt;/&lt;h2&gt; Ctrl+H" id="wmd-heading-button" class="wmd-button"></li><li style="background-position: -180px 0px;" title="Horizontal Rule &lt;hr&gt; Ctrl+R" id="wmd-hr-button" class="wmd-button"></li><li id="wmd-spacer3" class="wmd-spacer"></li><li style="background-position: -200px -20px;" title="Undo - Ctrl+Z" id="wmd-undo-button" class="wmd-button"></li><li style="background-position: -220px -20px;" title="Redo - Ctrl+Shift+Z" id="wmd-redo-button" class="wmd-button"></li><li style="background-position: -240px 0px;" id="wmd-help-button" class="wmd-button"><a title="WMD website" target="_blank" href="http://wmd-editor.com/"></a></li></ul></div>
+                    <div class="resizable-textarea"><span><textarea class="processed" rows="10" cols="40" name="text" id="editor"></textarea><div style="margin-right: -1px;" class="grippie"></div></span></div>
+                    <div class="preview-toggle">
+                        <table width="100%">
+                            <tbody><tr>
+                                <td>
+                                    <span id="pre-collapse" title="Toggle the real time Markdown editor preview">[hide preview]</span>
+                                </td>
+                                <td style="text-align: right;" id="editor-metrics"></td>
+                                
+                                <td style="text-align:right;">
+                                    <input name="wiki" id="id_wiki" type="checkbox"> 
+                                    <span style="font-weight:normal;cursor:help" title="if you choose community wiki option, the question and answer do not generate points and name of author will not be shown">
+                                            <label for="id_wiki">community wiki</label> 
+                                    </span>
+                                </td>
+                                
+                            </tr>
+                        
+                        </tbody></table>  
+                    </div>
+                    
+                    <div id="previewer" class="wmd-preview"></div>
+                </div>
+
+	            
+                
+                <p><span class="form-error"></span></p>
+                <input value="Login/Signup to Post Your Answer" class="submit" style="float:left" onclick="submitClicked(event, this.form)" type="button">
+            
+        </form>
+    </div>
+</div>
+
+<!-- google_ad_section_end -->
+
+        </div>
+        <div id="CARight">
+            
+<div class="boxC" id="subscription_box">
+    <h3 class="subtitle">Follow this Question via Email</h3><!--<strong>By Email:</strong>--><p>Once you sign in you will be able to subscribe for any updates here</p><!--<strong>By RSS:</strong><p><a class="feed-icon" style="background-image:url('/m/aiqus_skin/media/images/feed-icon-small.png');"
+        href="/questions/2206/pacman-result-for-q7-too-good-to-be-true?type=rss" title="subscribe to answers"></a>
+    Answers
+</p><p><a class="feed-icon" style="background-image:url('/m/aiqus_skin/media/images/feed-icon-small.png');"
+        href="/questions/2206/pacman-result-for-q7-too-good-to-be-true?type=rss&comments=yes" title="subscribe to comments and answers"></a>
+    Answers and Comments
+</p>-->
+
+</div>
+
+
+<div style="display: none;" class="boxC" id="editor_side_bar">
+    <p class="subtitle darkred">Q&amp;A Editor Basics</p>
+    <ul class="list-item">
+        <li>
+           to upload an image into your question or answer hit <img src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/image_upload_icon.png">
+        </li>
+        <li>
+           to create bulleted or numbered lists hit <img src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/numbered_list_icon.png"> or <img src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/bulleted_list_icon.png">	
+        </li>
+        <li>
+           to add a title or header hit <img src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/create_header_icon.png">
+        </li>
+        <li>
+           to section your text hit <img src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/page_break_icon.png">
+        </li>
+        <li>
+	   to make a link clickable, surround it with &lt;a&gt; and &lt;/a&gt; (for example, &lt;a&gt;www.google.com&lt;/a&gt;)
+        </li>
+        <li>
+			basic HTML tags are also supported (for those who know a bit of HTML)
+        </li>
+	<li>
+	To insert an <strong>EQUATION</strong> you can use <strong>LaTeX</strong>. (backslash \ has to be escaped, so in your LaTeX code you have to replace \ with \\). You can see more examples and info <a href="http://www.aiqus.com/questions/34067/aiqus-admin-added-support-for-latex-syntax-math-formulas">here</a>
+
+	</li>
+    </ul>
+    <p class="info-box-follow-up-links">
+        <a href="http://www.aiqus.com/markdown_help/" target="_blank">learn more </a>
+    </p>
+</div>
+
+
+<!-- 
+
+
+
+<div id="sidebar-upper" class="boxC">
+
+    <table class="subscriptionBox">
+
+
+
+<tr>
+    <th width="100%" id="cust_top" colspan=2><center>Please <a href="/account/signin/">Login</a> to Subscribe to Specific Classes</center></th>
+</tr>
+
+
+
+
+</div>
+
+ -->
+
+<!--
+<div class="boxC">
+    <p>
+		Tags:
+    </p>
+    <p class="tags" >
+        
+        	<a href="/tags/heuristic/"
+            class="tag-link-heuristic"
+			title="see questions tagged'heuristic'using tags"
+			rel="tag">heuristic</a> <span class="tag-number">&#215;18</span><br/>
+        
+        	<a href="/tags/pacman/"
+            class="tag-link-pacman"
+			title="see questions tagged'pacman'using tags"
+			rel="tag">pacman</a> <span class="tag-number">&#215;17</span><br/>
+        
+    </p>
+    <p>
+        Asked: <strong title="Oct. 16, 2011, 2:12 a.m.">16 Oct '11, 02:12</strong>
+    </p>
+    <p> 
+     	Seen: <strong>3,857 times</strong>
+    </p>
+    <p> 
+        Last updated: <strong title="Feb. 7, 2013, 7:45 p.m.">07 Feb, 19:45</strong>
+    </p>
+</div>
+-->
+<div class="boxC">
+    <h3 class="subtitle">Related questions</h3>
+    <div class="questions-related">
+
+        
+        <p>
+            <a href="http://www.aiqus.com/questions/7058/pa1-mini-contest">PA1: Mini contest</a>
+        </p>
+        
+        <p>
+            <a href="http://www.aiqus.com/questions/3805/question-about-tile-game-in-segment-2">Question about tile game in segment 2</a>
+        </p>
+        
+        <p>
+            <a href="http://www.aiqus.com/questions/7077/programming-assignment-2">Programming assignment 2</a>
+        </p>
+        
+        <p>
+            <a href="http://www.aiqus.com/questions/4653/example-of-pessimistic-heuristic">Example of pessimistic heuristic?</a>
+        </p>
+        
+        <p>
+            <a href="http://www.aiqus.com/questions/9918/pacman-projects-paper">Pacman projects paper</a>
+        </p>
+        
+        <p>
+            <a href="http://www.aiqus.com/questions/6983/homework-17-a-search">Homework 1.7 - A* Search</a>
+        </p>
+        
+        <p>
+            <a href="http://www.aiqus.com/questions/11661/where-is-an-action">Where is an action?</a>
+        </p>
+        
+        <p>
+            <a href="http://www.aiqus.com/questions/10909/is-there-a-general-heuristic-of-save-everything-and-rerun-minimize-luck">Is there a general heuristic of "save everything and rerun"?  Minimize luck?</a>
+        </p>
+        
+        <p>
+            <a href="http://www.aiqus.com/questions/11892/programming-assignment-pacman-review">[closed] Programming assignment: Pacman Review</a>
+        </p>
+        
+        <p>
+            <a href="http://www.aiqus.com/questions/14704/midterm-2-why-is-heuristic-not-admissible">Midterm 2: why is heuristic not admissible?</a>
+        </p>
+        
+
+    </div>
+</div>
+
+
+
+
+<div id="sidebar-lower" class="boxC">
+    <div class="body">
+        <div style="text-align: center;">
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-8295897761072887";
+/* aiqus_sidebar */
+google_ad_slot = "4857945609";
+google_ad_width = 120;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript" src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/show_ads.js">
+</script><ins style="display:inline-table;border:none;height:600px;margin:0;padding:0;position:relative;visibility:visible;width:120px"><ins id="aswift_2_anchor" style="display:block;border:none;height:600px;margin:0;padding:0;position:relative;visibility:visible;width:120px"><iframe marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){w.location.replace(h)}}" id="aswift_2" name="aswift_2" style="left:0;position:absolute;top:0;" frameborder="0" height="600" scrolling="no" width="120"></iframe></ins></ins>
+
+</div>
+     </div>
+</div>
+
+
+
+
+
+        </div>
+        <div id="tail" style="clear:both;">
+            
+            
+        </div>
+    </div>
+    <div class="spacer3"></div>
+</div>
+
+        
+            <div id="ground">
+                
+
+  
+<!-- google_ad_section_start(weight=ignore) -->
+<div>
+    <div class="footerLinks">
+         <a href="http://www.aiqus.com/about/">about</a> <span class="link-separator"> |</span> <a href="http://www.aiqus.com/faq/">faq</a> <span class="link-separator"> |</span> <a href="http://www.aiqus.com/privacy/">privacy</a> <span class="link-separator"> |</span> <a href="http://www.aiqus.com/contact/?next=/questions/2206/pacman-result-for-q7-too-good-to-be-true">contact</a> 
+    </div>
+  <p>
+     <a href="http://osqa.net/" target="_blank" title="OSQA Development Build (SVN-1200)">
+        powered by OSQA
+     </a>
+  </p>
+</div>
+ <div id="licenseLogo">
+  <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">
+            <img src="Pacman%20result%20for%20Q7%20too%20good%20to%20be%20true%3F%20-%20aiqus_files/by-sa-88x31.png" title="Creative Commons: Attribution - Share Alike" alt="cc-by-sa" height="31" width="88">
+  </a>
+ </div>
+<!-- google_ad_section_end(weight=ignore) -->
+
+
+            </div>
+        
+        
+
+        
+            <script type="text/javascript">
+                var _gaq = _gaq || [];
+                _gaq.push(['_setAccount', 'UA-3679982-23']);
+                _gaq.push(['_trackPageview']);
+
+                (function() {
+                    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+                })();
+            </script>
+        
+        </div>
+
+        <!-- Put all elements with fixed position here, IE6 fixed position fix: http://ryanfait.com/position-fixed-ie6/ -->
+        <div class="notify" style="display:none">
+            
+                
+            
+            <a id="close-notify" onclick="notify.close(true)">×</a>
+        </div>
+    
+
+
+</body></html>
+<!-- end template base_content.html -->
