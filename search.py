@@ -99,7 +99,7 @@ def search(problem, queue):
             successor = Node(successor, current_node)
             if successor.state not in explored:
                 if problem.isGoalState(successor.state):
-                        return back_track(successor)
+                    return back_track(successor)
                 else:    
                     frontier.push(successor)
         explored.add(current_node.state)
