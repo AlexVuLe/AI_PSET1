@@ -83,11 +83,10 @@ def back_track(node):
 
 def search(problem, queue):
     from game import Directions
-  
     root = Node([problem.getStartState(), None, 0], None)
     if problem.isGoalState(root.state):
         return [Directions.STOP]
-    print 'checked initial state'
+    
     frontier = queue()
     frontier.push(root)
     explored = set()
@@ -97,13 +96,12 @@ def search(problem, queue):
         successors = problem.getSuccessors(current_node.state)
         
         for successor in successors:
-            successor = Node(successor, parent = current_node)
+            successor = Node(successor, current_node)
             if successor.state not in explored:
                 if problem.isGoalState(successor.state):
                         return back_track(successor)
                 else:    
                     frontier.push(successor)
-            print successor
         explored.add(current_node.state)
 
 def depthFirstSearch(problem):
