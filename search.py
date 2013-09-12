@@ -75,12 +75,36 @@ class Node:
         self.parent = parent
 
 def back_track(node):        
-    path = []
+    path = util.Queue()
     while node.parent:
-        path.insert(0,node.action)
+        path.push(node.action)
         node = node.parent
-    print len(path)
-    return path
+    return path.list
+
+def search(problem, queue):
+    from game import Directions
+  
+    root = Node([problem.getStartState(), None, 0], None)
+    if problem.isGoalState(root.state):
+        return [Directions.STOP]
+    print 'checked initial state'
+    frontier = queue()
+    frontier.push(root)
+    explored = set()
+    
+    while not frontier.isEmpty():
+        current_node = frontier.pop()
+        successors = problem.getSuccessors(current_node.state)
+        
+        for successor in successors:
+            successor = Node(successor, parent = current_node)
+            if successor.state not in explored:
+                if problem.isGoalState(successor.state):
+                        return back_track(successor)
+                else:    
+                    frontier.push(successor)
+            print successor
+        explored.add(current_node.state)
 
 def depthFirstSearch(problem):
   """
@@ -98,38 +122,15 @@ def depthFirstSearch(problem):
   print "Is the start a goal?", problem.isGoalState(problem.getStartState())
   print "Start's successors:", problem.getSuccessors(problem.getStartState())
   """
-  from game import Directions
-  
-  root = Node([problem.getStartState(), None, 0], None)
-  if problem.isGoalState(root.state):
-      return [Directions.STOP]
-  print 'checked initial state'
-  frontier = util.Stack()
-  frontier.push(root)
-  explored = set()
-  
-  while not frontier.isEmpty():
-      current_node = frontier.pop()
-      successors = problem.getSuccessors(current_node.state)
-      
-      for successor in successors:
-          successor = Node(successor, parent = current_node)
-          if successor.state not in explored:
-              if problem.isGoalState(successor.state):
-                      return back_track(successor)
-              else:    
-                  frontier.push(successor)
-          print successor
-      explored.add(current_node.state)
+  return search(problem, util.Stack)
   
 def breadthFirstSearch(problem):
   """
   Search the shallowest nodes in the search tree first.
   [2nd Edition: p 73, 3rd Edition: p 82]
   """
-  "*** YOUR CODE HERE ***"
-  util.raiseNotDefined()
-      
+  return search(problem, util.Queue)
+  
 def uniformCostSearch(problem):
   "Search the node of least total cost first. "
   "*** YOUR CODE HERE ***"
