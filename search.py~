@@ -68,15 +68,11 @@ def tinyMazeSearch(problem):
   return  [s,s,w,s,w,w,s,w]
 
 class Node:
-    def __init__(self, state, parent, problem):
+    def __init__(self, state, parent):
         self.state = state[0]
         self.action = state[1]
         self.cost = state[2]
         self.parent = parent
-        if parent:
-          self.priority = parent.priority + problem.costFn(state[0])
-        else:
-          self.priority = state[2]
 
 def back_track(node):        
     path = util.Queue()
@@ -85,13 +81,13 @@ def back_track(node):
         node = node.parent
     return path.list
 
-def search(problem, dataStructure):
+def search(problem, queue):
     from game import Directions
-    root = Node([problem.getStartState(), None, 0], None, problem)
+    root = Node([problem.getStartState(), None, 0], None)
     if problem.isGoalState(root.state):
         return [Directions.STOP]
     
-    frontier = dataStructure()
+    frontier = queue()
     frontier.push(root)
     explored = set()
     
@@ -100,37 +96,13 @@ def search(problem, dataStructure):
         successors = problem.getSuccessors(current_node.state)
         
         for successor in successors:
-            successor = Node(successor, current_node, problem)
+            successor = Node(successor, current_node)
             if successor.state not in explored:
                 if problem.isGoalState(successor.state):
-                  return back_track(successor)
+                    return back_track(successor)
                 else:    
-                  frontier.push(successor)
+                    frontier.push(successor)
         explored.add(current_node.state)
-
-def searchWithPriority(problem, priorityFn):
-    from game import Directions
-    root = Node([problem.getStartState(), None, 0], None, problem)
-    if problem.isGoalState(root.state):
-        return [Directions.STOP]
-    
-    frontier = util.PriorityQueueWithFunction(priorityFn)
-    frontier.push(root)
-    explored = set()
-    
-    while not frontier.isEmpty():
-        current_node = frontier.pop()
-        successors = problem.getSuccessors(current_node.state)
-        
-        for successor in successors:
-            successor = Node(successor, current_node, problem)
-            if successor.state not in explored:
-                if problem.isGoalState(successor.state):
-                  return back_track(successor)
-                else:    
-                  frontier.push(successor)
-        explored.add(current_node.state)
-
 
 def depthFirstSearch(problem):
   """
@@ -159,13 +131,9 @@ def breadthFirstSearch(problem):
   
 def uniformCostSearch(problem):
   "Search the node of least total cost first. "
-  
-  def ucsPriorityFn(node):
-    return node.priority
-  
-  return searchWithPriority(problem, ucsPriorityFn)
+  "*** YOUR CODE HERE ***"
+  util.raiseNotDefined()
 
-          
 def nullHeuristic(state, problem=None):
   """
   A heuristic function estimates the cost from the current state to the nearest
@@ -175,10 +143,8 @@ def nullHeuristic(state, problem=None):
 
 def aStarSearch(problem, heuristic=nullHeuristic):
   "Search the node that has the lowest combined cost and heuristic first."
-  def aStarPriorityFn(node):
-    return node.priority + heuristic(node.state, problem)
-  
-  return searchWithPriority(problem, aStarPriorityFn)
+  "*** YOUR CODE HERE ***"
+  util.raiseNotDefined()
     
   
 # Abbreviations
