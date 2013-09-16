@@ -98,6 +98,7 @@ def search(problem, dataStructure):
     while not frontier.isEmpty():
         current_node = frontier.pop()
         successors = problem.getSuccessors(current_node.state)
+        explored.add(current_node.state)
         
         for successor in successors:
             successor = Node(successor, current_node, problem)
@@ -106,7 +107,7 @@ def search(problem, dataStructure):
                   return back_track(successor)
                 else:    
                   frontier.push(successor)
-        explored.add(current_node.state)
+        
 
 def searchWithPriority(problem, priorityFn):
     from game import Directions
@@ -121,6 +122,7 @@ def searchWithPriority(problem, priorityFn):
     while not frontier.isEmpty():
         current_node = frontier.pop()
         successors = problem.getSuccessors(current_node.state)
+        explored.add(current_node.state)
         
         for successor in successors:
             successor = Node(successor, current_node, problem)
@@ -129,7 +131,7 @@ def searchWithPriority(problem, priorityFn):
                   return back_track(successor)
                 else:    
                   frontier.push(successor)
-        explored.add(current_node.state)
+        
 
 
 def depthFirstSearch(problem):
