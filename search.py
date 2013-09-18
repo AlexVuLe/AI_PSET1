@@ -74,14 +74,14 @@ class Node:
         self.cost = state[2]
         self.parent = parent
         if parent:
-          self.priority = parent.priority + problem.costFn(self.state)
+            self.g_score = parent.g_score + self.cost
         else:
-          self.priority = self.cost
-    
+            self.g_score = 0
+        
     def __eq__(self, other):
         return self.state == other.state
 
-def back_track(node):        
+def solution(node):        
     path = util.Queue()
     while node.parent:
         path.push(node.action)
@@ -90,9 +90,9 @@ def back_track(node):
 
 def search(problem, dataStructure):
     from game import Directions
-    root = Node([problem.getStartState(), None, 0], None, problem)
+    root = Node([problem.getStartState(), Directions.STOP, 0], None, problem)
     if problem.isGoalState(root.state):
-        return [Directions.STOP]
+        return solution(root)
     
     frontier = dataStructure()
     frontier.push(root)
@@ -100,39 +100,16 @@ def search(problem, dataStructure):
     
     while not frontier.isEmpty():
         current_node = frontier.pop()
-        successors = problem.getSuccessors(current_node.state)
         explored.add(current_node.state)
+        successors = problem.getSuccessors(current_node.state)
         
         for successor in successors:
             successor = Node(successor, current_node, problem)
             if successor.state not in explored and successor not in frontier.list:
                 if problem.isGoalState(successor.state):
-                  return back_track(successor)
+                    return solution(successor)
                 else:    
-                  frontier.push(successor)
-
-def searchWithPriority(problem, priorityFn):
-    from game import Directions
-    root = Node([problem.getStartState(), None, 0], None, problem)
-    if problem.isGoalState(root.state):
-        return [Directions.STOP]
-    
-    frontier = util.PriorityQueueWithFunction(priorityFn)
-    frontier.push(root)
-    explored = set()
-    
-    while not frontier.isEmpty():
-        current_node = frontier.pop()
-        successors = problem.getSuccessors(current_node.state)
-        explored.add(current_node.state)
-        
-        for successor in successors:
-            successor = Node(successor, current_node, problem)
-            if successor.state not in explored:
-                if problem.isGoalState(successor.state):
-                  return back_track(successor)
-                else:    
-                  frontier.push(successor)
+                    frontier.push(successor)
 
 def depthFirstSearch(problem):
   """
@@ -158,15 +135,39 @@ def breadthFirstSearch(problem):
   [2nd Edition: p 73, 3rd Edition: p 82]
   """
   return search(problem, util.Queue)
-  
-def uniformCostSearch(problem):
-  "Search the node of least total cost first. "
-  
-  def ucsPriorityFn(node):
-    return node.priority
-  
-  return searchWithPriority(problem, ucsPriorityFn)
 
+def find_item_in_list(item, list):
+    n = len(list)
+    for i in range(n):
+        if item == list[i]:
+            return i
+    return None 
+
+def uniformCostSearch(problem):
+    "Search the node of least total cost first. "
+    from game import Directions
+    root = Node([problem.getStartState(), Directions.STOP, 0], None, problem)
+    frontier = util.PriorityQueue()
+    frontier.push(root, root.g_score)
+    explored = set()
+    
+    while not frontier.isEmpty():
+        current_node = frontier.pop()
+        if problem.isGoalState(current_node.state):
+            return solution(current_node)
+        explored.add(current_node.state)
+        successors = problem.getSuccessors(current_node.state)
+        
+        for successor in successors:
+            successor = Node(successor, current_node, problem)
+            nodes_in_frontier = [heap[1] for heap in frontier.heap]
+            in_frontier = find_item_in_list(successor, nodes_in_frontier)
+            if successor.state not in explored and not in_frontier:
+                frontier.push(successor, successor.g_score)
+            elif in_frontier:
+                repeated_node = nodes_in_frontier[in_frontier]      
+                if repeated_node.g_score > successor.g_score:
+                    frontier.heap[in_frontier] = (successor.g_score, successor)
           
 def nullHeuristic(state, problem=None):
   """
@@ -178,7 +179,7 @@ def nullHeuristic(state, problem=None):
 def aStarSearch(problem, heuristic=nullHeuristic):
   "Search the node that has the lowest combined cost and heuristic first."
   def aStarPriorityFn(node):
-    return node.priority + heuristic(node.state, problem)
+    return node.f_score + heuristic(node.state, problem)
   
   return searchWithPriority(problem, aStarPriorityFn)
     
