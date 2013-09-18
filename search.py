@@ -74,9 +74,12 @@ class Node:
         self.cost = state[2]
         self.parent = parent
         if parent:
-          self.priority = parent.priority + problem.costFn(state[0])
+          self.priority = parent.priority + problem.costFn(self.state)
         else:
-          self.priority = state[2]
+          self.priority = self.cost
+    
+    def __eq__(self, other):
+        return self.state == other.state
 
 def back_track(node):        
     path = util.Queue()
@@ -102,12 +105,11 @@ def search(problem, dataStructure):
         
         for successor in successors:
             successor = Node(successor, current_node, problem)
-            if successor.state not in explored:
+            if successor.state not in explored and successor not in frontier.list:
                 if problem.isGoalState(successor.state):
                   return back_track(successor)
                 else:    
                   frontier.push(successor)
-        
 
 def searchWithPriority(problem, priorityFn):
     from game import Directions
@@ -131,8 +133,6 @@ def searchWithPriority(problem, priorityFn):
                   return back_track(successor)
                 else:    
                   frontier.push(successor)
-        
-
 
 def depthFirstSearch(problem):
   """
