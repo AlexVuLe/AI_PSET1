@@ -144,12 +144,11 @@ def find_item_in_list(item, list):
             return i
     return None 
 
-def uniformCostSearch(problem):
-    "Search the node of least total cost first. "
+def searchWithPriority(problem, priorityFn):
     from game import Directions
     root = Node([problem.getStartState(), Directions.STOP, 0], None, problem)
-    frontier = util.PriorityQueue()
-    frontier.push(root, root.g_score)
+    frontier = util.PriorityQueueWithFunction(priorityFn)
+    frontier.push(root)
     explored = set()
     
     while not frontier.isEmpty():
@@ -164,14 +163,21 @@ def uniformCostSearch(problem):
             nodes_in_frontier = [heap[1] for heap in frontier.heap]
             in_frontier = find_item_in_list(successor, nodes_in_frontier)
             if successor.state not in explored and not in_frontier:
-                frontier.push(successor, successor.g_score)
+                frontier.push(successor)
             elif in_frontier:
                 repeated_node = nodes_in_frontier[in_frontier]      
                 if repeated_node.g_score > successor.g_score:
                     frontier.heap[in_frontier] = frontier.heap[-1]
                     frontier.heap.pop()
                     heapq.heapify(frontier.heap)
-                    frontier.push(successor, successor.g_score)
+                    frontier.push(successor)
+
+def uniformCostSearch(problem):
+  "Search the node of least total cost first. "
+  def ucsPriorityFn(node):
+    return node.g_score
+
+  return searchWithPriority(problem, ucsPriorityFn)
           
 def nullHeuristic(state, problem=None):
   """
@@ -183,7 +189,8 @@ def nullHeuristic(state, problem=None):
 def aStarSearch(problem, heuristic=nullHeuristic):
   "Search the node that has the lowest combined cost and heuristic first."
   def aStarPriorityFn(node):
-    return node.f_score + heuristic(node.state, problem)
+    h_score = heuristic(node.state, problem)
+    return node.g_score + h_score
   
   return searchWithPriority(problem, aStarPriorityFn)
     
