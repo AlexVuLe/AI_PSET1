@@ -68,8 +68,15 @@ def tinyMazeSearch(problem):
   w = Directions.WEST
   return  [s,s,w,s,w,w,s,w]
 
+def nullHeuristic(state, problem=None):
+  """
+  A heuristic function estimates the cost from the current state to the nearest
+  goal in the provided SearchProblem.  This heuristic is trivial.
+  """
+  return 0
+
 class Node:
-    def __init__(self, state, parent, problem):
+    def __init__(self, state, parent, problem, heuristic=nullHeuristic):
         self.state = state[0]
         self.action = state[1]
         self.cost = state[2]
@@ -78,6 +85,8 @@ class Node:
             self.g_score = parent.g_score + self.cost
         else:
             self.g_score = 0
+        self.h_score = heuristic(self.state, problem)
+        self.f_score = self.g_score + self.h_score
         
     def __eq__(self, other):
         return self.state == other.state
@@ -144,11 +153,11 @@ def find_item_in_list(item, list):
             return i
     return None 
 
-def searchWithPriority(problem, priorityFn):
+def searchWithPriority(problem, heuristic=nullHeuristic):
     from game import Directions
-    root = Node([problem.getStartState(), Directions.STOP, 0], None, problem)
-    frontier = util.PriorityQueueWithFunction(priorityFn)
-    frontier.push(root)
+    root = Node([problem.getStartState(), Directions.STOP, 0], None, problem, heuristic=heuristic)
+    frontier = util.PriorityQueue()
+    frontier.push(root, root.f_score)
     explored = set()
     
     while not frontier.isEmpty():
@@ -159,40 +168,28 @@ def searchWithPriority(problem, priorityFn):
         successors = problem.getSuccessors(current_node.state)
         
         for successor in successors:
-            successor = Node(successor, current_node, problem)
+            successor = Node(successor, current_node, problem, heuristic=heuristic)
             nodes_in_frontier = [heap[1] for heap in frontier.heap]
             in_frontier = find_item_in_list(successor, nodes_in_frontier)
             if successor.state not in explored and not in_frontier:
-                frontier.push(successor)
+                frontier.push(successor, successor.f_score)
             elif in_frontier:
                 repeated_node = nodes_in_frontier[in_frontier]      
                 if repeated_node.g_score > successor.g_score:
                     frontier.heap[in_frontier] = frontier.heap[-1]
                     frontier.heap.pop()
                     heapq.heapify(frontier.heap)
-                    frontier.push(successor)
+                    frontier.push(successor, successor.f_score)
 
 def uniformCostSearch(problem):
   "Search the node of least total cost first. "
-  def ucsPriorityFn(node):
-    return node.g_score
 
-  return searchWithPriority(problem, ucsPriorityFn)
-          
-def nullHeuristic(state, problem=None):
-  """
-  A heuristic function estimates the cost from the current state to the nearest
-  goal in the provided SearchProblem.  This heuristic is trivial.
-  """
-  return 0
+  return searchWithPriority(problem)
 
 def aStarSearch(problem, heuristic=nullHeuristic):
   "Search the node that has the lowest combined cost and heuristic first."
-  def aStarPriorityFn(node):
-    h_score = heuristic(node.state, problem)
-    return node.g_score + h_score
   
-  return searchWithPriority(problem, aStarPriorityFn)
+  return searchWithPriority(problem, heuristic)
     
   
 # Abbreviations
