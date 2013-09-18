@@ -12,6 +12,7 @@ by Pacman agents (in searchAgents.py).
 """
 
 import util
+import heapq
 
 class SearchProblem:
   """
@@ -167,7 +168,10 @@ def uniformCostSearch(problem):
             elif in_frontier:
                 repeated_node = nodes_in_frontier[in_frontier]      
                 if repeated_node.g_score > successor.g_score:
-                    frontier.heap[in_frontier] = (successor.g_score, successor)
+                    frontier.heap[in_frontier] = frontier.heap[-1]
+                    frontier.heap.pop()
+                    heapq.heapify(frontier.heap)
+                    frontier.push(successor, successor.g_score)
           
 def nullHeuristic(state, problem=None):
   """
