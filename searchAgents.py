@@ -352,6 +352,18 @@ class CornersProblem(search.SearchProblem):
       if self.walls[x][y]: return 999999
     return len(actions)
 
+def manhattan_distance(xy1, xy2):
+    return abs(xy1[0] - xy2[0]) + abs(xy1[1] - xy2[1])
+
+def find_nearest_corner(pacman, corners):
+    nearest_corner = None
+    distance_to_nearest_corner = float('inf') 
+    for corner in corners:
+        tmp_distance = manhattan_distance(pacman, corner) 
+        if(tmp_distance < distance_to_nearest_corner):
+            distance_to_nearest_corner = tmp_distance
+            nearest_corner = corner
+    return distance_to_nearest_corner, nearest_corner
 
 def cornersHeuristic(state, problem):
     """
@@ -368,28 +380,25 @@ def cornersHeuristic(state, problem):
     """
     corners = problem.corners # These are the corner coordinates
     walls = problem.walls # These are the walls of the maze, as a Grid (game.py)
-    point1 = state[0]
-    x1, y1 = point1
-    min_h_score = float('inf')
-    for corner in corners:
-        point2 = corner
-        x2, y2 = point2
-        assert not walls[x1][y1], 'point1 is a wall: ' + point1
-        assert not walls[x2][y2], 'point2 is a wall: ' + str(point2)
-        prob = PositionSearchProblem(problem.gameState, start=point1, goal=point2, warn=False)
-        h_score = len(search.aStarSearch(prob, manhattanHeuristic))
-        if h_score < min_h_score:
-            min_h_score = h_score
-    #===========================================================================
-    # min_h_score = float('inf')
-    # for corner in corners:
-    #  xy1 = state[0]
-    #  xy2 = corner
-    #  h_score = abs(xy1[0] - xy2[0]) + abs(xy1[1] - xy2[1])
-    #  if h_score < min_h_score:
-    #      min_h_score = h_score
-    #===========================================================================
-    return min_h_score # Default to trivial solution
+    
+    pacman = state[0]
+    corners_left = filter(lambda x: not state[1][corners.index(x)], corners)
+    if(len(corners_left) == 0):
+        return 0
+    
+    # Calculate nearest corner to Pacman
+    distance_to_nearest_corner, nearest_corner = find_nearest_corner(pacman, corners_left)
+    corners_list = list(corners_left)
+    corners_list.remove(nearest_corner)
+    
+    # Use manhattan distance to go to the subsequent corners
+    while len(corners_list)>0:
+        next_distance, next_corner = find_nearest_corner(nearest_corner, corners_list)
+        distance_to_nearest_corner += next_distance
+        nearest_corner = next_corner
+        corners_list.remove(next_corner)
+       
+    return distance_to_nearest_corner
 
 class AStarCornersAgent(SearchAgent):
   "A SearchAgent for FoodSearchProblem using A* and your foodHeuristic"
