@@ -277,11 +277,10 @@ class CornersProblem(search.SearchProblem):
     self._expanded = 0 # Number of search nodes expanded
     
     "*** YOUR CODE HERE ***"
-    self.cornerVisited = [False] * 4
-    self.startState = (self.startingPosition, tuple(self.cornerVisited))
+    self.startState = (self.startingPosition, tuple([False] * 4))
     
     self._visited, self._visitedlist, self._expanded = {}, [], 0
-    
+
   def getStartState(self):
     "Returns the start state (in your state space, not the full Pacman state space)"
     "*** YOUR CODE HERE ***"
@@ -289,11 +288,7 @@ class CornersProblem(search.SearchProblem):
     
   def isGoalState(self, state):
     "Returns whether this search state is a goal state of the problem"
-    if state[0] in self.corners:
-      cornerIndex = self.corners.index(state[0])
-      self.cornerVisited[cornerIndex] = True
-      print "alalalalalal", self.cornerVisited
-    isGoal = self.cornerVisited == [True] * 4
+    isGoal = state[1] == tuple([True] * 4)
 
     if isGoal:
       self._visitedlist.append(state[0])
@@ -330,8 +325,11 @@ class CornersProblem(search.SearchProblem):
       nextx, nexty = int(x + dx), int(y + dy)
       if not self.walls[nextx][nexty]:
         nextState = (nextx, nexty)
-        cost = 1
-        successors.append( ((nextState, tuple(self.cornerVisited)), action, cost) )
+        cornerVisited = list(state[1])
+        if nextState in self.corners:
+          cornerIndex = self.corners.index(nextState)
+          cornerVisited[cornerIndex] = True
+        successors.append( ((nextState, tuple(cornerVisited)), action, 1) )
 
     self._expanded += 1
     if state not in self._visited:
