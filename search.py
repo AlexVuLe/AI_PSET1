@@ -172,6 +172,8 @@ def searchWithPriority(problem, heuristic=nullHeuristic):
             nodes_in_frontier = [heap[1] for heap in frontier.heap]
             in_frontier = find_item_in_list(successor, nodes_in_frontier)
             if successor.state not in explored and not in_frontier:
+                if successor.h_score - successor.parent.h_score + 1 < 0:
+                    raise ValueError('inconsistent heuristics')
                 frontier.push(successor, successor.f_score)
             elif in_frontier:
                 repeated_node = nodes_in_frontier[in_frontier]      

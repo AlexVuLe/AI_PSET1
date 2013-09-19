@@ -267,6 +267,7 @@ class CornersProblem(search.SearchProblem):
     """
     Stores the walls, pacman's starting position and corners.
     """
+    self.gameState = startingGameState
     self.walls = startingGameState.getWalls()
     self.startingPosition = startingGameState.getPacmanPosition()
     top, right = self.walls.height-2, self.walls.width-2 
@@ -353,23 +354,42 @@ class CornersProblem(search.SearchProblem):
 
 
 def cornersHeuristic(state, problem):
-  """
-  A heuristic for the CornersProblem that you defined.
-  
-    state:   The current search state 
-             (a data structure you chose in your search problem)
+    """
+    A heuristic for the CornersProblem that you defined.
     
-    problem: The CornersProblem instance for this layout.  
-    
-  This function should always return a number that is a lower bound
-  on the shortest path from the state to a goal of the problem; i.e.
-  it should be admissible (as well as consistent).
-  """
-  corners = problem.corners # These are the corner coordinates
-  walls = problem.walls # These are the walls of the maze, as a Grid (game.py)
-  
-  "*** YOUR CODE HERE ***"
-  return 0 # Default to trivial solution
+      state:   The current search state 
+               (a data structure you chose in your search problem)
+      
+      problem: The CornersProblem instance for this layout.  
+      
+    This function should always return a number that is a lower bound
+    on the shortest path from the state to a goal of the problem; i.e.
+    it should be admissible (as well as consistent).
+    """
+    corners = problem.corners # These are the corner coordinates
+    walls = problem.walls # These are the walls of the maze, as a Grid (game.py)
+    point1 = state[0]
+    x1, y1 = point1
+    min_h_score = float('inf')
+    for corner in corners:
+        point2 = corner
+        x2, y2 = point2
+        assert not walls[x1][y1], 'point1 is a wall: ' + point1
+        assert not walls[x2][y2], 'point2 is a wall: ' + str(point2)
+        prob = PositionSearchProblem(problem.gameState, start=point1, goal=point2, warn=False)
+        h_score = len(search.aStarSearch(prob, manhattanHeuristic))
+        if h_score < min_h_score:
+            min_h_score = h_score
+    #===========================================================================
+    # min_h_score = float('inf')
+    # for corner in corners:
+    #  xy1 = state[0]
+    #  xy2 = corner
+    #  h_score = abs(xy1[0] - xy2[0]) + abs(xy1[1] - xy2[1])
+    #  if h_score < min_h_score:
+    #      min_h_score = h_score
+    #===========================================================================
+    return min_h_score # Default to trivial solution
 
 class AStarCornersAgent(SearchAgent):
   "A SearchAgent for FoodSearchProblem using A* and your foodHeuristic"
