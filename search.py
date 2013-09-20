@@ -6,6 +6,9 @@
 # John DeNero (denero@cs.berkeley.edu) and Dan Klein (klein@cs.berkeley.edu).
 # For more info, see http://inst.eecs.berkeley.edu/~cs188/sp09/pacman.html
 
+# (c) Vu Le and Shiwen Chen
+
+
 """
 In search.py, you will implement generic search algorithms which are called 
 by Pacman agents (in searchAgents.py).
@@ -117,7 +120,7 @@ def search(problem, dataStructure):
     
     frontier = dataStructure()
     frontier.push(root)
-    explored = set()
+    explored = set() # a set of states that have been explored
     
     while not frontier.isEmpty():
         current_node = frontier.pop()

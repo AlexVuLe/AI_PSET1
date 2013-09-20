@@ -6,6 +6,8 @@
 # John DeNero (denero@cs.berkeley.edu) and Dan Klein (klein@cs.berkeley.edu).
 # For more info, see http://inst.eecs.berkeley.edu/~cs188/sp09/pacman.html
 
+# (c) Vu Le and Shiwen Chen
+
 """
 This file contains all of the agents that can be selected to 
 control Pacman.  To select an agent, use the '-p' option
@@ -277,14 +279,13 @@ class CornersProblem(search.SearchProblem):
         print 'Warning: no food in corner ' + str(corner)
     self._expanded = 0 # Number of search nodes expanded
     
-    "*** YOUR CODE HERE ***"
     # State: (tuple of current position, a 1x4 list indicating if a corner is visited)
     self.startState = (self.startingPosition, tuple([False] * 4))
     self._visited, self._visitedlist, self._expanded = {}, [], 0
 
   def getStartState(self):
     "Returns the start state (in your state space, not the full Pacman state space)"
-    "*** YOUR CODE HERE ***"
+    
     return self.startState
     
   def isGoalState(self, state):
@@ -320,7 +321,6 @@ class CornersProblem(search.SearchProblem):
       #   nextx, nexty = int(x + dx), int(y + dy)
       #   hitsWall = self.walls[nextx][nexty]
       
-      "*** YOUR CODE HERE ***"
       x, y = state[0]
       dx, dy = Actions.directionToVector(action)
       nextx, nexty = int(x + dx), int(y + dy)
@@ -391,6 +391,7 @@ def cornersHeuristic(state, problem):
     walls = problem.walls # These are the walls of the maze, as a Grid (game.py)
     
     position = state[0]
+    # corners that have not been visited
     corners_left = filter(lambda x: not state[1][corners.index(x)], corners)
     if(len(corners_left) == 0):
         return 0
@@ -497,16 +498,19 @@ def foodHeuristic(state, problem):
   Subsequent calls to this heuristic can access problem.heuristicInfo['wallCount']
   """
   position, foodGrid = state
-  "*** YOUR CODE HERE ***"
   foodList = foodGrid.asList()
 
   if(len(foodList) == 0):
     return 0
 
-  allEdgeWeights = dict()
-  unReached = [position]
-  unReached.extend(foodList)
+  """
+  First travel from the current position to the nearest food. Then, treat the nearest node as a root and build a minimum spanning tree spanning all the food.
+  """
+  allEdgeWeights = dict() # a dictionary of all the pairwise manhattan distances
+  unReached = [position]  
+  unReached.extend(foodList) # nodes we have not covered in the path 
 
+  # Compute all the manhattan distances
   for node1 in unReached:
     edgeWeightDict = dict()
     for node2 in unReached:
@@ -516,6 +520,7 @@ def foodHeuristic(state, problem):
 
   unReached.remove(position)
 
+  # Find the nearest food and store the manhattan distance
   minWeight = float('inf')
   nearest_node = None
   for node in unReached:
@@ -524,15 +529,18 @@ def foodHeuristic(state, problem):
       minWeight = edgeWeight
       nearest_node = node
   h_score = float(minWeight)
-  reached = [nearest_node]
+  reached = [nearest_node] # list of nodes we have covered in the path
 
+  # Build the MST from the nearest node
   while len(unReached) > 1:
     endNode = None
     minWeight = float('inf')
     for node in reached:
       weightList = allEdgeWeights[node].copy()
+      # do not want to go back to the starting position
       del weightList[position]
-      weightList = [(b,a) for a,b in weightList.items()]
+      weightList = [(weight, node_position) for node_position,weight in weightList.items()]
+      # remove from the list edges to nodes that have already been reached
       weightList = [x for x in weightList if x[1] not in reached]
       edgeWeight = min(weightList)[0]
       if edgeWeight < minWeight:
@@ -568,7 +576,7 @@ class ClosestDotSearchAgent(SearchAgent):
     food = gameState.getFood()
     walls = gameState.getWalls()
     problem = AnyFoodSearchProblem(gameState)
-    
+    # use bfs to get to the closest food
     return search.bfs(problem)
     
   
@@ -604,7 +612,7 @@ class AnyFoodSearchProblem(PositionSearchProblem):
     that will complete the problem definition.
     """
     x,y = state
- 
+    # check if the current state has food
     return self.food[x][y]
 
 
