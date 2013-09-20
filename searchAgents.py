@@ -462,6 +462,12 @@ class AStarFoodSearchAgent(SearchAgent):
     self.searchFunction = lambda prob: search.aStarSearch(prob, foodHeuristic)
     self.searchType = FoodSearchProblem
 
+def find_farthest_food(position, foodList):
+    farthest_food = None
+    dist1 = manhattan_distance(position, foodList[0]) 
+    dist2 = manhattan_distance(position, foodList[-1]) 
+    return max(dist1, dist2)
+
 def foodHeuristic(state, problem):
   """
   Your heuristic for the FoodSearchProblem goes here.
@@ -489,7 +495,51 @@ def foodHeuristic(state, problem):
   """
   position, foodGrid = state
   "*** YOUR CODE HERE ***"
-  return 0
+  foodList = foodGrid.asList()
+
+  if(len(foodList) == 0):
+    return 0
+
+  allEdgeWeights = dict()
+  unReached = [position]
+  unReached.extend(foodList)
+
+  for node1 in unReached:
+    edgeWeightDict = dict()
+    for node2 in unReached:
+      if node2 != node1:
+        edgeWeightDict[node2] = manhattan_distance(node1, node2)    
+    allEdgeWeights[node1] = edgeWeightDict
+
+  unReached.remove(position)
+
+  minWeight = float('inf')
+  nearest_node = None
+  for node in unReached:
+    edgeWeight = allEdgeWeights[position][node]
+    if edgeWeight < minWeight:
+      minWeight = edgeWeight
+      nearest_node = node
+  h_score = float(minWeight)
+  reached = [nearest_node]
+
+  while len(unReached) > 1:
+    endNode = None
+    minWeight = float('inf')
+    for node in reached:
+      weightList = allEdgeWeights[node].copy()
+      del weightList[position]
+      weightList = [(b,a) for a,b in weightList.items()]
+      weightList = [x for x in weightList if x[1] not in reached]
+      edgeWeight = min(weightList)[0]
+      if edgeWeight < minWeight:
+        minWeight = edgeWeight
+        endNode = min(weightList)[1]
+    h_score += minWeight
+    reached.append(endNode)
+    unReached.remove(endNode)
+
+  return h_score
   
 class ClosestDotSearchAgent(SearchAgent):
   "Search for all food using a sequence of searches"
