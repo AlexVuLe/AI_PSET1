@@ -76,6 +76,11 @@ def nullHeuristic(state, problem=None):
   return 0
 
 class Node:
+    ''' A tree node that contains state information
+    Arguments
+    state: (tuple of current state, action, cost)
+    parent: parent node 
+    '''
     def __init__(self, state, parent, problem, heuristic=nullHeuristic):
         self.state = state[0]
         self.action = state[1]
@@ -89,9 +94,11 @@ class Node:
         self.f_score = self.g_score + self.h_score
         
     def __eq__(self, other):
+        ''' Compare nodes only by there state '''
         return self.state == other.state
 
-def solution(node):        
+def solution(node):
+    ''' Trace back the path to get to this node from root '''        
     path = util.Queue()
     while node.parent:
         path.push(node.action)
@@ -99,6 +106,10 @@ def solution(node):
     return path.list
 
 def search(problem, dataStructure):
+    ''' General search function for BFS and DFS
+    Argument 
+    dataStructure: queue (BFS) or stack (DFS)
+    '''
     from game import Directions
     root = Node([problem.getStartState(), Directions.STOP, 0], None, problem)
     if problem.isGoalState(root.state):
@@ -116,7 +127,8 @@ def search(problem, dataStructure):
         for successor in successors:
             successor = Node(successor, current_node, problem)
             if successor.state not in explored and successor not in frontier.list:
-                if problem.isGoalState(successor.state):
+                # Check for goal before adding into list
+                if problem.isGoalState(successor.state): 
                     return solution(successor)
                 else:    
                     frontier.push(successor)
@@ -147,6 +159,9 @@ def breadthFirstSearch(problem):
   return search(problem, util.Queue)
 
 def find_item_in_list(item, list):
+    ''' Find the index of an item in list 
+        Return None of not found
+    ''' 
     n = len(list)
     for i in range(n):
         if item == list[i]:
@@ -154,6 +169,7 @@ def find_item_in_list(item, list):
     return None 
 
 def searchWithPriority(problem, heuristic=nullHeuristic):
+    ''' General search function with heuristic and priority queue '''
     from game import Directions
     root = Node([problem.getStartState(), Directions.STOP, 0], None, problem, heuristic=heuristic)
     frontier = util.PriorityQueue()
@@ -162,6 +178,7 @@ def searchWithPriority(problem, heuristic=nullHeuristic):
     
     while not frontier.isEmpty():
         current_node = frontier.pop()
+        # Check for goal when going out of the queue
         if problem.isGoalState(current_node.state):
             return solution(current_node)
         explored.add(current_node.state)
@@ -169,13 +186,16 @@ def searchWithPriority(problem, heuristic=nullHeuristic):
         
         for successor in successors:
             successor = Node(successor, current_node, problem, heuristic=heuristic)
-            nodes_in_frontier = [heap[1] for heap in frontier.heap]
-            in_frontier = find_item_in_list(successor, nodes_in_frontier)
+            nodes_in_frontier = [heap[1] for heap in frontier.heap] # List of states in frontier
+            in_frontier = find_item_in_list(successor, nodes_in_frontier) # Index of successor in frontier
             if successor.state not in explored and not in_frontier:
+                # Check for consistency
                 if successor.h_score - successor.parent.h_score + 1 < 0:
                     raise ValueError('inconsistent heuristics')
                 frontier.push(successor, successor.f_score)
             elif in_frontier:
+                # If a node is already in frontier with higher cost,
+                # update the frontier node to reflect shorter path
                 repeated_node = nodes_in_frontier[in_frontier]      
                 if repeated_node.g_score > successor.g_score:
                     frontier.heap[in_frontier] = frontier.heap[-1]
